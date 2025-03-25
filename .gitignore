@@ -66,8 +66,6 @@ local.properties
 .idea/workspace.xml
 .idea/navEditor.xml
 .idea/assetWizardSettings.xml
-.gradle/
-build/
 app/build/
 
 # Node / Tailwind / Web
