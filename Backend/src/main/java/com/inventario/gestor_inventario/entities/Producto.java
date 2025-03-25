@@ -15,10 +15,13 @@ import java.util.Date;
 public class Producto {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
+        @Column(name = "id")
+        private int id_producto;
         private String nombre;
         private int cantidad;
-        private String estado,codigo_qr;
+        @Column(name = "estado", columnDefinition = "ENUM('activo', 'desactivado')")
+        private String estado;
+        private String codigo_qr;
         @Column(name="url_img", columnDefinition = "varchar(600)")
         private String url_img;
         private Date fecha_creacion;

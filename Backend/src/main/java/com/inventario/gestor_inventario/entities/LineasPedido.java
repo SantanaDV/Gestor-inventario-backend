@@ -13,22 +13,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LineasPedido {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_pepido", nullable = false)
     @JsonIgnore
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_producto", nullable = false)
     @JsonIgnore
     private Producto producto;
 
     private int cantidad;
 
     private String estado;
+
 
 }

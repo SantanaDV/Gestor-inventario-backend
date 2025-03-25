@@ -3,14 +3,15 @@ package com.inventario.gestor_inventario.utilities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-
 @Data
 @AllArgsConstructor
-public class TipoNotificaciones {
 
-    private String tipo;
+public class EstadoProductos {
+    private String estado;
 
-    public TipoNotificaciones(){
-        tipo="otro";
+    public EstadoProductos(){
+        estado = "desactivado";
     }
+
+
 }

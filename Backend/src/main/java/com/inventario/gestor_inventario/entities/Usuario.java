@@ -15,7 +15,8 @@ import java.util.Date;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    @Column(name = "id")
+    private int id_usuario;
     private String nombre,contraseña;
     @Column(unique = true)
     private String email;
