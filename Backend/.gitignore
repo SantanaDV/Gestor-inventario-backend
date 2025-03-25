@@ -84,3 +84,4 @@ tailwind.config.js
 .postcssrc.js
 *.css.map
 *.js.map
+/.metadata/
