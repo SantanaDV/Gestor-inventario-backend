@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
-public class UsuarioServiceImpl implements UserDetailsService {
+public class JPAUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -21,30 +23,30 @@ public class UsuarioServiceImpl implements UserDetailsService {
     // Otros métodos de la lógica de negocio para Usuario (crear, actualizar, eliminar, etc.)
 
     /**
-     * Carga un usuario por su email, mapeando su rol a GrantedAuthority.
+     * Carga un usuario por su email, mapeando sus roles a GrantedAuthority.
      * Se asume que en la base de datos, el campo email es único y actúa como username.
      * El campo 'estado' se usa para determinar si el usuario está habilitado (por ejemplo, 1 = activo).
-     * El campo 'rol' se mapea a ROLE_ADMIN o ROLE_EMPLEADO según corresponda.
+     * El campo 'roles' es un conjunto de roles (por ejemplo, "ADMIN" o "EMPLEADO").
      */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> userOptional = Optional.ofNullable(usuarioRepository.findByMail(email));
+        // Buscar el usuario por su email
+        Optional<Usuario> userOptional = Optional.ofNullable(usuarioRepository.findByEmail(email));
         if (userOptional.isEmpty()) {
             throw new UsernameNotFoundException(String.format("El usuario %s no existe en el sistema", email));
         }
         Usuario user = userOptional.get();
 
-        // Convertir el valor del rol a una GrantedAuthority.
-        // Se asume que el campo 'rol' es un enum con valores 'admin' o 'empleado'.
-        String rol = user.getRol(); // Ejemplo: "admin" o "empleado"
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + rol.toUpperCase());
-        List<GrantedAuthority> authorities = List.of(authority);
+        // Convertir los roles del usuario a GrantedAuthority
+        Set<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.name())) // Añadir prefijo "ROLE_"
+                .collect(Collectors.toSet());
 
-        // Determinar si el usuario está habilitado; se asume que 'estado' == 1 es activo.
+        // Determinar si el usuario está habilitado; se asume que 'estado' == 1 es activo
         boolean enabled = user.getEstado() == 1;
 
-        // Se asumen true para accountNonExpired, credentialsNonExpired y accountNonLocked.
+        // Crear y retornar el UserDetails con los datos del usuario
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),         // username
                 user.getContraseña(),    // password (almacenada encriptada)

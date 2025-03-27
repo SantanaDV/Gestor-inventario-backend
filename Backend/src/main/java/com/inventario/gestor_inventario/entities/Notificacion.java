@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name="notificacion")
+@Table(name="notificaciones")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,13 +19,12 @@ public class Notificacion {
     private int id;
 
 
-
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id")
     @JsonIgnore
     private Usuario usuario;
 
-    @Column(name="url_img", columnDefinition = "TEXT")
+    @Column(name="mensaje", columnDefinition = "TEXT")
     private String mensaje;
 
     @Column(name = "tipo", columnDefinition = "ENUM('stock bajo', 'tarea asignada', 'otro')")

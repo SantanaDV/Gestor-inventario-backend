@@ -23,6 +23,11 @@ public class PedidoController {
         return this.pedidoServiceImpl.ListarPedidos();
     }
 
+    @PostMapping
+    public Pedido CrearPedido(@RequestBody Pedido pedido) {
+        return this.pedidoServiceImpl.CrearActualizarPedido(pedido);
+    }
+
     @PutMapping
     public Pedido ActualizarPedido(@RequestBody Pedido pedido) {
         return this.pedidoServiceImpl.CrearActualizarPedido(pedido);

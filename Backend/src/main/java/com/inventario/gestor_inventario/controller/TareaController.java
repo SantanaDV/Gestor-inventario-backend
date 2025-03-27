@@ -24,8 +24,13 @@ public class TareaController {
         return this.repository.ListarTarea();
     }
 
-    @PutMapping
+    @PostMapping
     public Tarea CrearTarea(@RequestBody Tarea tarea) {
+        return this.repository.CrearTarea(tarea);
+    }
+
+    @PutMapping
+    public Tarea ActualizarTarea(@RequestBody Tarea tarea) {
         return this.repository.CrearTarea(tarea);
     }
 

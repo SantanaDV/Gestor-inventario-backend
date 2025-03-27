@@ -1,18 +1,20 @@
 package com.inventario.gestor_inventario.controller;
-
-import com.inventario.gestor_inventario.entities.LineasPedido;
-import com.inventario.gestor_inventario.entities.Tarea;
 import com.inventario.gestor_inventario.entities.Usuario;
-import com.inventario.gestor_inventario.repository.UsuarioRepository;
 import com.inventario.gestor_inventario.service.implementations.UsuarioServiceImpl;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 @RestController
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
     private UsuarioServiceImpl usuarioController;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UsuarioController(UsuarioServiceImpl usuario){
         this.usuarioController = usuario;
@@ -25,6 +27,9 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario CrearUsuario(@RequestBody Usuario usuario) {
+        usuario.setContraseña(passwordEncoder.encode(usuario.getContraseña()));
+        Date tiempo = new Date();
+        usuario.setFechaAlta(tiempo);
         return this.usuarioController.CrearActualizarUsuario(usuario);
     }
 
