@@ -13,16 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/usuarioWeb")  // Esto sería la ruta base
 public class UsuarioWebController {
-
     @Autowired
-    @Qualifier("usuarioServiceImpl")
     private UsuarioServiceImpl usuarioService;
 
-    @RequestMapping("/api/usuarioWeb")
-    public String list(Model model) {
-        model.addAttribute("listaUsuarios",usuarioService.ListarUsuarios());
+    @GetMapping
+    public String listarUsersWeb(Model model) {
+        model.addAttribute("listaUsuariosWeb", usuarioService.ListarUsuarios());
         return "index";
     }
-
 }

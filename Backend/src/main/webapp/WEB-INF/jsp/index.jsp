@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,26 +27,19 @@
     </ul>
   </div>
 </nav>
-    <table border="1">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Fecha de Alta</th>
-                </tr>
-            </thead>
-            <c:if test="${empty listarUsuarios}">
-                <p>No hay usuarios para mostrar.</p>
-            </c:if>
-            <c:forEach items="${listarUsuarios}" var="card">
-                <tr>
-                    <td>${card.id}</td>
-                    <td>${card.nombre}</td>
-                    <td>${card.email}</td>
-                    <td>${card.fechaAlta}</td>
-                </tr>
-            </c:forEach>
-        </table>
+
+ <c:choose>
+     <c:when test="${not empty listaUsuariosWeb}">
+         <ul>
+             <c:forEach var="item" items="${listaUsuariosWeb}">
+                 <li>${item.nombre}</li>
+             </c:forEach>
+         </ul>
+     </c:when>
+     <c:otherwise>
+         <b>NO DATA</b>
+     </c:otherwise>
+ </c:choose>
+
 </body>
 </html>
