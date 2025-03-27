@@ -2,13 +2,15 @@ package com.inventario.gestor_inventario.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.inventario.gestor_inventario.utilities.ProductoIdSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="lineaPedido")
+@Table(name="lineas_pedido")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,13 +22,13 @@ public class LineasPedido {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id_pepido", nullable = false)
+    @JoinColumn(name = "id_pedido", nullable = false)
     @JsonIgnore
     private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_producto", nullable = false)
-    @JsonIgnore
+    @JsonSerialize(using = ProductoIdSerializer.class)
     private Producto producto;
 
     private int cantidad;

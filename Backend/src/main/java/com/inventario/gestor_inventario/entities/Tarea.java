@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="tarea")
+@Table(name="tareas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +17,9 @@ public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String descripcion,estado,empleado_asignado;
+    private String descripcion;
+    @Column(name = "estado", columnDefinition = "ENUM('Por hacer', 'En Proceso', 'Finalizada')")
+    private String estado;
+    private String empleado_asignado;
     private Date fecha_asignacion,fecha_creacion;
-
 }

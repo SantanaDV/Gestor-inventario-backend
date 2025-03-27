@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name="pedido")
+@Table(name="pedidos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +18,5 @@ public class Pedido {
     @Column(name = "id")
     private int id_pedido;
     private int estado,tipo;
-    private Date fecha,fecha_creacion;
+    private Date fecha;
 }
