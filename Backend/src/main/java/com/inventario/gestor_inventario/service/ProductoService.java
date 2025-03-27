@@ -17,7 +17,7 @@ public interface ProductoService {
      * @param producto encarga de crear un poducto
      * @return Producto crearProducto
      */
-    Producto CrearProducto(Producto producto);
+    Producto CrearActualizarProducto(Producto producto);
 
 
     /**
