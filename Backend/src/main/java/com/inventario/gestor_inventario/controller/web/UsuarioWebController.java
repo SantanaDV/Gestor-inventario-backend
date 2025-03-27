@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,5 +24,14 @@ public class UsuarioWebController {
     public String listarUsersWeb(Model model) {
         model.addAttribute("listaUsuariosWeb", usuarioService.ListarUsuarios());
         return "index";
+    }
+    @GetMapping("/grafico")
+    public String verGrafico1(Model model) {
+        Map<String, Integer> surveyMap = new LinkedHashMap<>();
+        surveyMap.put("Java",40);
+        surveyMap.put("Kotlin",100);
+        surveyMap.put("Python",90);
+        model.addAttribute("surveyMap",surveyMap);
+        return "index2";
     }
 }
