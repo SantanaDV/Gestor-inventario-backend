@@ -60,6 +60,8 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
 
             // Extraer la lista de roles desde los claims
             List<String> roles = claims.get("authorities", List.class);
+            String rol = claims.get("rol", String.class); // Extraer el rol del token
+
             // Verificamos si el nombre de usuario o los roles son nulos
             if (username == null || roles == null) {
                 // Si son nulos, devolvemos un error de no autorizado
@@ -76,6 +78,7 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
             // Autenticamos el usuario con los roles obtenidos
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(username, null, authorities);
+            auth.setDetails(rol); // Establecer el rol como detalle de la autenticación
 
             // Establecemos la autenticación en el contexto de seguridad
             SecurityContextHolder.getContext().setAuthentication(auth);

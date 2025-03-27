@@ -24,25 +24,34 @@ public class SecurityConfig {
     }
 
     // Configuración principal de seguridad
-    @Bean // define un componente (bean) que Spring puede inyectar en otras partes de la aplicación.
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    JwtAuthenticationFilter jwtAuthenticationFilter,
                                                    JwtValidationFilter jwtValidationFilter) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Deshabilita la protección CSRF (común en APIs REST)
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la política de sesión como STATELESS (sin estado)
+                .csrf(csrf -> csrf.disable()) // Deshabilita la protección CSRF
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la política de sesión como STATELESS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/**" // Permite todas las rutas (ajusta según tus necesidades)
+                        // Rutas públicas (acceso sin autenticación)
+                        .requestMatchers("/login").permitAll() // Permitir acceso al endpoint de login
+                        .requestMatchers("/registro").permitAll() // Permitir acceso al endpoint de registro
 
-                        ).permitAll() // Permite el acceso sin autenticación a las rutas especificadas
-                        .anyRequest().authenticated()  // Requiere autenticación para cualquier otra ruta
+                        // Rutas protegidas por roles
+                        .requestMatchers("/api/usuario/admin/**").hasRole("ADMIN") // Solo para administradores
+                        .requestMatchers("/api/usuario/empleado/**").hasAnyRole("ADMIN","EMPLEADO") // Para empleados y administradores
+
+                        // Rutas comunes para usuarios autenticados
+                        .requestMatchers("/api/usuario/**").authenticated() // Cualquier otra ruta bajo /api/usuario requiere autenticación
+
+                        // Cualquier otra ruta requiere autenticación
+                        .anyRequest().authenticated()
                 )
                 .addFilter(jwtAuthenticationFilter) // Añade el filtro de autenticación JWT
                 .addFilterAfter(jwtValidationFilter, JwtAuthenticationFilter.class); // Añade el filtro de validación JWT después del filtro de autenticación
 
         return http.build(); // Construye y devuelve la configuración de seguridad
     }
+
 
     // Configura el proveedor de autenticación
     @Bean
@@ -66,14 +75,13 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-  // Declara el filtro de autenticación JWT como un bean
-    // Declaramos los filtros como beans, inyectándoles el AuthenticationManager
+    // Declara el filtro de autenticación JWT como un bean
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         return new JwtAuthenticationFilter(authenticationManager);
     }
 
- // Declara el filtro de validación JWT como un bean
+    // Declara el filtro de validación JWT como un bean
     @Bean
     public JwtValidationFilter jwtValidationFilter(AuthenticationManager authenticationManager) {
         return new JwtValidationFilter(authenticationManager);
