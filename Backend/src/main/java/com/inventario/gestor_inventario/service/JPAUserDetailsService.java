@@ -1,4 +1,4 @@
-package com.inventario.gestor_inventario.service.implementations;
+package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Usuario;
 import com.inventario.gestor_inventario.repository.UsuarioRepository;
