@@ -29,4 +29,19 @@ public class ProductoServiceImpl implements ProductoService {
     public void EliminarProducto(Producto producto) {
         productoRepository.deleteById(producto.getId_producto());
     }
+
+    @Override
+    public long totalCantidadStock() {
+        return productoRepository.contarTotalCantidadStock();
+    }
+
+    @Override
+    public long totalProductosStockBajo() {
+        return productoRepository.contarTotalProductosStockBajo();
+    }
+
+    @Override
+    public long totalProductosStockCritico() {
+        return productoRepository.contarTotalProductosStockCritico();
+    }
 }

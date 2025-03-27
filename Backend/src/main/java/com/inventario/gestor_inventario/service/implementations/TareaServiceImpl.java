@@ -33,4 +33,19 @@ public class TareaServiceImpl implements TareaService {
     public void EliminarTarea(int id) {
         tareaRepository.deleteById(id);
     }
+
+    @Override
+    public long contarTareasEnProceso() {
+        return tareaRepository.contarNumeroTareasEnProceso();
+    }
+
+    @Override
+    public long contarTareasPorHacer() {
+        return tareaRepository.contarNumeroTareasPorHacer();
+    }
+
+    @Override
+    public long contarTareasFinalizadas() {
+        return tareaRepository.contarNumeroTareasFinalizadas();
+    }
 }

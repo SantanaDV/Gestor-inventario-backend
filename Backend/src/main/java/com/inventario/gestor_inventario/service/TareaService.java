@@ -28,7 +28,29 @@ public interface TareaService {
 
     /**
      * Elimino tarea
-     * @param tarea recibe la tarea que va a ser eliminada
+     * @param id recibe el id de la tarea que va a ser eliminada
      */
     void EliminarTarea(int id);
+
+    /**
+     * Cuenta el total de tareas en Proceso
+     * @return long
+     */
+    long contarTareasEnProceso();
+
+    /**
+     * Cuenta el total de tareas Por hacer
+     * @return long
+     */
+    long contarTareasPorHacer();
+
+
+    /**
+     * Cuenta el total de tareas Finalizadas
+     * @return long
+     */
+    long contarTareasFinalizadas();
+
+
+
 }
