@@ -1,17 +1,13 @@
 package com.inventario.gestor_inventario.service.implementations;
 
-import com.inventario.gestor_inventario.controller.UsuarioController;
-import com.inventario.gestor_inventario.entities.LineasPedido;
 import com.inventario.gestor_inventario.entities.Notificacion;
 import com.inventario.gestor_inventario.repository.NotificacionRepository;
 import com.inventario.gestor_inventario.repository.UsuarioRepository;
 import com.inventario.gestor_inventario.service.NotificacionService;
-import com.inventario.gestor_inventario.service.UsuarioService;
-import com.inventario.gestor_inventario.utilities.LineasPedidoDTO;
 import com.inventario.gestor_inventario.utilities.NotificacionesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.inventario.gestor_inventario.entities.Usuario;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

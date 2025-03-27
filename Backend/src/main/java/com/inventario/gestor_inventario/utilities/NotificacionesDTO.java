@@ -14,4 +14,6 @@ public class NotificacionesDTO {
     private String estado;
     private Date fecha_creacion;
     private String mensaje,tipo;
+
+
 }
