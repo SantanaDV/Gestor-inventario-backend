@@ -24,4 +24,6 @@ public interface UsuarioService {
      */
     void EliminarUsuario(int id);
 
+    Usuario BuscarUsuario(int id);
+
 }
