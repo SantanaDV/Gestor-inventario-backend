@@ -42,4 +42,6 @@ public class UsuarioController {
     public void eliminarUsuario(@PathVariable int id) {
         this.usuarioController.EliminarUsuario(id);
     }
+
+
 }
