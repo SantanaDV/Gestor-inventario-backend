@@ -25,4 +25,25 @@ public interface ProductoService {
      * @param producto toma un producto como parametro de entrada
      */
     void EliminarProducto(Producto producto);
+
+    /**
+     * Retorna la cantidad total de productos
+     * @return long
+     */
+    long totalCantidadStock();
+
+
+    /**
+     * Retorna la cantidad total de productos con stock bajo
+     * @return long
+     */
+    long totalProductosStockBajo();
+
+    /**
+     * Retorna la cantidad total de productos con stock critico
+     * @return long
+     */
+    long totalProductosStockCritico();
+
+
 }

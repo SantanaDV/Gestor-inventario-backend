@@ -6,7 +6,29 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductoRepository extends JpaRepository<Producto,Integer> {
+public interface ProductoRepository extends JpaRepository<Producto, Integer> {
+
+    /**
+     * Query en JPA para contar la cantidad total de productos
+     * @return long
+     */
+    @Query("SELECT SUM(p.cantidad) FROM Producto p")
+    long contarTotalCantidadStock();
+
+    /**
+     * Query en JPA que cuenta la cantidad total de productos con cantidad menor o igual a 5
+     * @return long
+     */
+    @Query("SELECT COUNT(p) FROM Producto p WHERE p.cantidad <=5")
+    long contarTotalProductosStockBajo();
+
+    /**
+     * Query en JPA que cuenta la cantidad total de productos con cantidad menor o igual a 2
+     * @return long
+     */
+    @Query("SELECT COUNT(p) FROM Producto p WHERE p.cantidad <=2")
+    long contarTotalProductosStockCritico();
+
 
 
 }
