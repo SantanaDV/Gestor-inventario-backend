@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,26 +27,39 @@
     </ul>
   </div>
 </nav>
+<h1>Lista de Productos</h1>
     <table border="1">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Fecha de Alta</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
-            <c:if test="${empty listarUsuarios}">
-                <p>No hay usuarios para mostrar.</p>
-            </c:if>
-            <c:forEach items="${listarUsuarios}" var="card">
+        <c:if test="${empty listarProductos}">
+            <p>No hay productos para mostrar.</p>
+        </c:if>
+        <c:if test="${not empty listarProductos}">
+            <table border="1">
+                <thead>
                 <tr>
-                    <td>${card.id}</td>
-                    <td>${card.nombre}</td>
-                    <td>${card.email}</td>
-                    <td>${card.fechaAlta}</td>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
                 </tr>
-            </c:forEach>
+                </thead>
+                <c:forEach items="${listarProductos}" var="card">
+                    <tr>
+                        <td>${card.id_producto}</td>
+                        <td>${card.nombre}</td>
+                        <td>${card.cantidad}</td>
+                        <td>${card.estado}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
         </table>
 </body>
 </html>
