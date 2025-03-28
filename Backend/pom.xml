@@ -97,6 +97,11 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> b4d5592508785c4c22c3439c802a6da2dbb0eaf5
 
 		<!-- Dependencia JSTL (CORRECTA) -->
 		<dependency>
@@ -117,7 +122,29 @@
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+<<<<<<< HEAD
+=======
+>>>>>>> rama_manuel
 
+		<!-- Dependencia JSTL (CORRECTA) -->
+>>>>>>> b4d5592508785c4c22c3439c802a6da2dbb0eaf5
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jsp-api</artifactId>
+			<version>9.0.46</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 
 	</dependencies>
 

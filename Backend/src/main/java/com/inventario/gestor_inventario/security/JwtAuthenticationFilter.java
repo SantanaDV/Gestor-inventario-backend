@@ -25,7 +25,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // Constructor que recibe el AuthenticationManager y configura la URL de login
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
-        // Configuramos la URL de login (puedes cambiarla si lo deseas)
+        // Configuramos la URL de login
         super.setFilterProcessesUrl("/login");
         this.authenticationManager = authenticationManager;
     }

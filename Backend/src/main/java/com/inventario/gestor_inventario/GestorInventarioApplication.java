@@ -22,5 +22,4 @@ public class GestorInventarioApplication {
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
-
 }
