@@ -19,10 +19,6 @@ public class TareaServiceImpl implements TareaService {
         return tareaRepository.findAll();
     }
 
-    @Override
-    public Tarea ListarTarea(Tarea tarea) {
-        return tareaRepository.save(tarea);
-    }
 
     @Override
     public Tarea CrearTarea(Tarea tarea) {
