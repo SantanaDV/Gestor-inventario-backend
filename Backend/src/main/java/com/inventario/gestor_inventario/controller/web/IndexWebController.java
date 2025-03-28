@@ -11,6 +11,6 @@ public class IndexWebController {
 
     @GetMapping
     public String returnIndex(Model model) {
-        return "index1";
+        return "index";
     }
 }

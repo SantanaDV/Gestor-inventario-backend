@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="./components/header.jsp" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,7 +42,6 @@
     </style>
 </head>
 <body>
-<%@ include file="index1.jsp" %>
 <div class="container my-5">
     <h1 class="text-center mb-4">Estadísticas de Inventario de Productos</h1>
     <!-- Lista de productos -->

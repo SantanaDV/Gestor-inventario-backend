@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="./components/header.jsp" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -132,30 +133,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<canvas id="myChart"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
- <script>
-   const ctx = document.getElementById('myChart');
-
-   new Chart(ctx, {
-     type: 'bar',
-     data: {
-       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-       datasets: [{
-         label: '# of Votes',
-         data: [12, 19, 3, 5, 2, 3],
-         borderWidth: 1
-       }]
-     },
-     options: {
-       scales: {
-         y: {
-           beginAtZero: true
-         }
-       }
-     }
-   });
- </script>
 
 
