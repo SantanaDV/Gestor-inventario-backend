@@ -27,7 +27,7 @@
     </ul>
   </div>
 </nav>
-
+<canvas id='grafico1'></canvas>
  <c:choose>
      <c:when test="${not empty listaUsuariosWeb}">
          <ul>
@@ -40,6 +40,6 @@
          <b>NO DATA</b>
      </c:otherwise>
  </c:choose>
-
 </body>
 </html>
+
