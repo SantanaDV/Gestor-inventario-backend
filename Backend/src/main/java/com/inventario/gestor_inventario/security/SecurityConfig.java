@@ -34,8 +34,12 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura la política de sesión como STATELESS
                 .authorizeHttpRequests(auth -> auth
                         // Rutas públicas (acceso sin autenticación)
+                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/login").permitAll() // Permitir acceso al endpoint de login
                         .requestMatchers("/registro").permitAll() // Permitir acceso al endpoint de registro
+                        .requestMatchers("/tareasWeb").permitAll()
+                        .requestMatchers("/productosWeb").permitAll()
+
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest().authenticated()
                 )
