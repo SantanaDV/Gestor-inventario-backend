@@ -1,6 +1,7 @@
 package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Producto;
+import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 
 import java.util.List;
 
@@ -53,4 +54,16 @@ public interface ProductoService {
     Producto obtenerProductoConQR(String codigo_qr);
 
 
+    /**
+     * Retorna los productos entrantes recientes
+     * @return List<Producto>
+     */
+    List<ProductosSalEntDTO>listarProductosEntrantesRecientes();
+
+
+    /**
+     * Retorna los productos salientes recientes
+     * @return List<Producto>
+     */
+    List<ProductosSalEntDTO>listarProductosSalientesRecientes();
 }

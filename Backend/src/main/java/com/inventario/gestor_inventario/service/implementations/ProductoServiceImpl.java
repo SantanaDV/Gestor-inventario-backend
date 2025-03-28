@@ -3,6 +3,7 @@ package com.inventario.gestor_inventario.service.implementations;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.repository.ProductoRepository;
 import com.inventario.gestor_inventario.service.ProductoService;
+import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,4 +52,11 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
 
+    public List<ProductosSalEntDTO> listarProductosEntrantesRecientes() {
+        return productoRepository.listarProductosEntrantesRecientes();
+    }
+    @Override
+    public List<ProductosSalEntDTO> listarProductosSalientesRecientes() {
+        return productoRepository.listarProductosSalientesRecientes();
+    }
 }

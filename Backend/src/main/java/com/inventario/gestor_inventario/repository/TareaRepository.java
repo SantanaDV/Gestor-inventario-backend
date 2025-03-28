@@ -18,6 +18,8 @@ public interface TareaRepository extends JpaRepository<Tarea, Integer> {
     List<Tarea> contarTareasEnProcesoPorHacer();
 
 
+
+
     /**
      *  Query en JPA que cuenta el total de tareas 'Finalizada'
      * @return long

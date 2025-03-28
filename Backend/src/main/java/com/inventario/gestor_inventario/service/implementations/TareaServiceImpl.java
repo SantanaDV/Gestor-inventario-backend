@@ -1,5 +1,6 @@
 package com.inventario.gestor_inventario.service.implementations;
 
+import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.entities.Tarea;
 import com.inventario.gestor_inventario.repository.TareaRepository;
 import com.inventario.gestor_inventario.service.TareaService;
@@ -39,4 +40,6 @@ public class TareaServiceImpl implements TareaService {
     public List<Tarea> contarTareasFinalizadas() {
         return tareaRepository.contarNumeroTareasFinalizadasHoy();
     }
+
+
 }
