@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,7 +39,7 @@ public class UsuarioController {
     }
 
     // Endpoint protegido para usuarios administrador (listar usuarios)
-    @GetMapping("/empleado/listarUsuarios")
+    @GetMapping("/admin/listarUsuarios")
     @PreAuthorize("hasRole('ADMIN')")
     public List<Usuario> ListarUsuarios() {
         return usuarioController.ListarUsuarios();
@@ -57,7 +56,13 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void eliminarUsuario(@PathVariable int id) {
-        this.usuarioController.EliminarUsuario(id);
+        this.usuarioController.EliminarUsuario(id);}
+
+    // Nuevo endpoint para empleados (solo pueden ver su propio perfil)
+    @GetMapping("/empleado/miPerfil")
+    @PreAuthorize("hasRole('EMPLEADO')")
+    public String miPerfil(@RequestParam String email) {
+        return usuarioController.obtenerUsuarioPorEmail(email);
     }
 
 
