@@ -11,12 +11,7 @@ public interface TareaService {
      */
     List<Tarea> ListarTarea();
 
-    /**
-     * Listamos las tareas
-     * @param tarea recibe una tarea
-     * @return tarea
-     */
-    Tarea ListarTarea(Tarea tarea);
+
 
     /**
      * Crear tarea

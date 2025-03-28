@@ -31,6 +31,14 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Query("SELECT p FROM Producto p WHERE p.cantidad <=2 AND p.estado='activo'")
     List<Producto> contarTotalProductosStockCritico();
 
+    /**
+     * Devolvemos la información de producto en base al QR
+     * @param codigo_qr
+     * @return Objeto Producto
+     */
+    Producto findByCodigoQr(String codigo_qr);
+
+
 
 
 }

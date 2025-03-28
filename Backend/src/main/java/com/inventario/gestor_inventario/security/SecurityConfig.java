@@ -6,13 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+@EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
 
@@ -35,14 +36,6 @@ public class SecurityConfig {
                         // Rutas públicas (acceso sin autenticación)
                         .requestMatchers("/login").permitAll() // Permitir acceso al endpoint de login
                         .requestMatchers("/registro").permitAll() // Permitir acceso al endpoint de registro
-
-                        // Rutas protegidas por roles
-                        .requestMatchers("/api/usuario/admin/**").hasRole("ADMIN") // Solo para administradores
-                        .requestMatchers("/api/usuario/empleado/**").hasAnyRole("ADMIN","EMPLEADO") // Para empleados y administradores
-
-                        // Rutas comunes para usuarios autenticados
-                        .requestMatchers("/api/usuario/**").authenticated() // Cualquier otra ruta bajo /api/usuario requiere autenticación
-
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest().authenticated()
                 )

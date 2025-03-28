@@ -13,6 +13,8 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/productosWeb")
+//Si queremos restringir el acceso por Roles
+// @PreAuthorize("hasRole('ADMIN')")
 public class ProductoWebController {
 
     @Autowired

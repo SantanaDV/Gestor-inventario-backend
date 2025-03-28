@@ -3,6 +3,7 @@ package com.inventario.gestor_inventario.controller;
 
 import com.inventario.gestor_inventario.entities.Notificacion;
 import com.inventario.gestor_inventario.entities.Pedido;
+import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.PedidoServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,8 @@ public class PedidoController {
         return this.pedidoServiceImpl.ListarPedidos();
     }
 
+
+
     @PostMapping
     public Pedido CrearPedido(@RequestBody Pedido pedido) {
         return this.pedidoServiceImpl.CrearActualizarPedido(pedido);
@@ -37,5 +40,7 @@ public class PedidoController {
     public void EliminarPedido(@PathVariable  int id){
         this.pedidoServiceImpl.EliminarPedido(id);
     }
+
+
 
 }

@@ -33,7 +33,7 @@ public class UsuarioController {
 
     // Endpoint protegido para empleados
     @GetMapping("/empleado")
-    @PreAuthorize("hasRole('EMPLEADO')")
+    @PreAuthorize("hasRole('EMPLEADO') and hasRole('ADMIN')")
     public String empleado() {
         return "Bienvenido, empleado!";
     }
