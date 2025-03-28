@@ -25,8 +25,9 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public void EliminarPedido(int id) {
+    public int EliminarPedido(int id) {
         this.pedidoRepository.deleteById(id);
+        return id;
     }
 
 
