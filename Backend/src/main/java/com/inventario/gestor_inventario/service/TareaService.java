@@ -43,7 +43,7 @@ public interface TareaService {
      * Cuenta el total de tareas Finalizadas
      * @return long
      */
-    long contarTareasFinalizadas();
+    List<Tarea> contarTareasFinalizadas();
 
 
 

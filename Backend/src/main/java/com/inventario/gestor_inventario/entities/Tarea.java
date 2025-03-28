@@ -21,5 +21,5 @@ public class Tarea {
     @Column(name = "estado", columnDefinition = "ENUM('Por hacer', 'En Proceso', 'Finalizada')")
     private String estado;
     private String empleado_asignado;
-    private Date fecha_asignacion,fecha_creacion;
+    private Date fecha_asignacion,fecha_finalizacion;
 }

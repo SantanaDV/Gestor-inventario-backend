@@ -37,13 +37,13 @@ public interface ProductoService {
      * Retorna la cantidad total de productos con stock bajo
      * @return long
      */
-    long totalProductosStockBajo();
+        List<Producto> totalProductosStockBajo();
 
     /**
      * Retorna la cantidad total de productos con stock critico
      * @return long
      */
-    long totalProductosStockCritico();
+    List<Producto> totalProductosStockCritico();
 
 
 }

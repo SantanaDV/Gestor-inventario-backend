@@ -21,7 +21,7 @@ public class TareaWebController {
     public String listarTareas(Model model) {
         // Obtener el número de tareas dependeiendo de su estado
         List<Tarea> tareasEnProcesoPorHacer = tareaService.contarTareasEnProcesoPorHacer();
-        long tareasFinalizadasHoy = tareaService.contarTareasFinalizadas();
+        List<Tarea> tareasFinalizadasHoy = tareaService.contarTareasFinalizadas();
 
         // Agregar los valores al modelo para pasarlos a la vista
         model.addAttribute("tareasProHaz", tareasEnProcesoPorHacer);
