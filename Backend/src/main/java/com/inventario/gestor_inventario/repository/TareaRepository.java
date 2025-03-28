@@ -24,7 +24,7 @@ public interface TareaRepository extends JpaRepository<Tarea, Integer> {
      *  Query en JPA que cuenta el total de tareas 'Finalizada'
      * @return long
      */
-    @Query("SELECT t FROM Tarea t WHERE t.estado = 'Finalizada' AND t.fecha_finalizacion < CURRENT DATE ")
+    @Query(value = "SELECT t.* FROM Tareas t WHERE t.estado = 'Finalizada' AND DATE(t.fecha_finalizacion) = CURRENT_DATE", nativeQuery = true)
     List<Tarea> contarNumeroTareasFinalizadasHoy();
 //    @Query("SELECT COUNT(t) FROM Tarea t WHERE t.estado = 'Finalizada'")
 //    long contarNumeroTareasFinalizadas();
