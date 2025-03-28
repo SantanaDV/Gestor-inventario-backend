@@ -7,53 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Movimientos de Productos</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <style>
-            body {
-                background-color: #f8f9fa;
-                font-family: 'Roboto', sans-serif;
-            }
-            h1, h2, h5 {
-                font-weight: 700;
-            }
-            .card {
-                border: none;
-                border-radius: 12px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                transition: transform 0.2s;
-            }
-            .card:hover {
-                transform: translateY(-5px);
-            }
-            .table {
-                background-color: #fff;
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .table thead {
-                background-color: #000 !important;
-                color: #fff !important;
-            }
-        </style>
+
 </head>
 <body>
     <%@ include file="./components/header.jsp" %>
     <div class="container my-5">
         <h1 class="text-center">Movimientos</h1>
 
-        <h2 class="mt-5">Lista de Productos Entrantes</h2>
+        <h2 class="mt-5 fw-light">Lista de Productos Entrantes</h2>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Fecha de Entrada</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Estado</th>
+                        <th class='bg-dark text-white'>Fecha de Entrada</th>
+                        <th class='bg-dark text-white'>Nombre</th>
+                        <th class='bg-dark text-white'>Cantidad</th>
+                        <th class='bg-dark text-white'>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,15 +42,15 @@
             </table>
         </div>
 
-        <h2 class="mt-5">Lista de Productos Salientes</h2>
+        <h2 class="mt-5 fw-light">Lista de Productos Salientes</h2>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Fecha de Entrada</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Estado</th>
+                        <th class='bg-black text-white'>Fecha de Entrada</th>
+                        <th class='bg-black text-white'>Nombre</th>
+                        <th class='bg-black text-white'>Cantidad</th>
+                        <th class='bg-black text-white'>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +67,6 @@
         </div>
     </div>
     <!-- Bootstrap JS (opcional para componentes interactivos) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

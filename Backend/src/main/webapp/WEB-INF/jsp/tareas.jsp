@@ -12,49 +12,20 @@
     <!-- Fuentes modernas (opcional) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Estilos personalizados -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Roboto', sans-serif;
-        }
-        h1, h2, h5 {
-            font-weight: 700;
-        }
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .table {
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .table th {
-            background-color: #343a40;
-            color: #fff;
-        }
-    </style>
-</head>
 <body>
 <div class="container my-5">
     <h1 class="text-center mb-4">Estadísticas de Tareas</h1>
     <!-- Lista de tareas -->
-    <h2 class="mt-5">Lista de Tareas</h2>
+    <h2 class="mt-5 fw-light">Lista de Tareas</h2>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Descripción</th>
-                <th>Estado</th>
-                <th>Empleado Asignado</th>
-                <th>Fecha de Asignación</th>
+                <th class='bg-dark text-white'>ID</th>
+                <th class='bg-dark text-white'>Descripción</th>
+                <th class='bg-dark text-white'>Estado</th>
+                <th class='bg-dark text-white'>Empleado Asignado</th>
+                <th class='bg-dark text-white'>Fecha de Asignación</th>
             </tr>
             </thead>
             <tbody>
@@ -79,10 +50,10 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Descripción</th>
-                                <th>Empleado Asignado</th>
-                                <th>Fecha de Asignación</th>
+                                <th class='bg-dark text-white'>ID</th>
+                                <th class='bg-dark text-white'>Descripción</th>
+                                <th class='bg-dark text-white'>Empleado Asignado</th>
+                                <th class='bg-dark text-white'>Fecha de Asignación</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -108,9 +79,9 @@
                         <table class="table table-bordered mb-0">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Descripción</th>
-                                <th>Empleado Asignado</th>
+                                <th class='bg-dark text-white'>ID</th>
+                                <th class='bg-dark text-white'>Descripción</th>
+                                <th class='bg-dark text-white'>Empleado Asignado</th>
                             </tr>
                             </thead>
                             <tbody>
