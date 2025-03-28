@@ -32,5 +32,7 @@ public interface TareaRepository extends JpaRepository<Tarea, Integer> {
      * @return long
      */
     @Query("SELECT COUNT(t) FROM Tarea t WHERE t.estado = 'Finalizada'")
-    long contarNumeroTareasFinalizadas();
+    long contarNumeroTareasFinalizadasHoy();
+//    @Query("SELECT COUNT(t) FROM Tarea t WHERE t.estado = 'Finalizada'")
+//    long contarNumeroTareasFinalizadas();
 }

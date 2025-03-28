@@ -46,6 +46,6 @@ public class TareaServiceImpl implements TareaService {
 
     @Override
     public long contarTareasFinalizadas() {
-        return tareaRepository.contarNumeroTareasFinalizadas();
+        return tareaRepository.contarNumeroTareasFinalizadasHoy();
     }
 }

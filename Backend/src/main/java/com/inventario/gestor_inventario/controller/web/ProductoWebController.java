@@ -16,9 +16,19 @@ public class ProductoWebController {
     private ProductoServiceImpl productoService;
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("listarProductos",productoService.listarProductos());
-        return "index1";
-    }
+    public String listarProductos(Model model) {
+        // Obtener el número de productos dependiendo del stock
+        long totalStock = productoService.totalCantidadStock();
+        long stockBajo = productoService.totalProductosStockBajo();
+        long stockCritico = productoService.totalProductosStockCritico();
 
+        // Agregar los valores al modelo para pasarlos a la vista
+        model.addAttribute("totalStock", totalStock);
+        model.addAttribute("stockBajo", stockBajo);
+        model.addAttribute("stockCritico", stockCritico);
+        model.addAttribute("listarProductos", productoService.listarProductos());
+
+
+        return "productos";
+    }
 }
