@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name="tareas")
+@Table(name = "tareas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,8 +21,7 @@ public class Tarea {
     @Column(name = "estado", columnDefinition = "ENUM('Por hacer', 'En Proceso', 'Finalizada')")
     private String estado;
 
-    @ManyToMany // Relación muchos a uno con Usuario(empleado responsable)
-    @JoinColumn(name = "empleado_asignado") // columna que almacena la clave foránea
+
     private String empleado_asignado;
-    private Date fecha_asignacion,fecha_creacion;
+    private Date fecha_asignacion, fecha_creacion;
 }

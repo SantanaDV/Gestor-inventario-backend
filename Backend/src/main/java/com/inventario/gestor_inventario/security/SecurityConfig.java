@@ -36,14 +36,6 @@ public class SecurityConfig {
                         // Rutas públicas (acceso sin autenticación)
                         .requestMatchers("/login").permitAll() // Permitir acceso al endpoint de login
                         .requestMatchers("/registro").permitAll() // Permitir acceso al endpoint de registro
-
-                        // Rutas protegidas por roles
-                        .requestMatchers("/api/usuario/admin/**").hasRole("ADMIN") // Solo para administradores
-                        .requestMatchers("/api/usuario/empleado/**").hasAnyRole("ADMIN","EMPLEADO") // Para empleados y administradores
-
-                        // Rutas comunes para usuarios autenticados
-                        .requestMatchers("/api/usuario/**").authenticated() // Cualquier otra ruta bajo /api/usuario requiere autenticación
-
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest().authenticated()
                 )
