@@ -34,7 +34,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
      * @param codigo_qr
      * @return Objeto Producto
      */
-    Producto buscarProductoConQR(String codigo_qr);
+    Producto findByCodigoQr(String codigo_qr);
 
 
 
