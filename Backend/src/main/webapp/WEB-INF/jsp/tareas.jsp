@@ -43,6 +43,32 @@
 <body>
 <div class="container my-5">
     <h1 class="text-center mb-4">Estadísticas de Tareas</h1>
+    <!-- Lista de tareas -->
+    <h2 class="mt-5">Lista de Tareas</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Empleado Asignado</th>
+                <th>Fecha de Asignación</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="tarea" items="${listarTareas}">
+                <tr>
+                    <td>${tarea.id}</td>
+                    <td>${tarea.descripcion}</td>
+                    <td>${tarea.estado}</td>
+                    <td>${tarea.empleado_asignado}</td>
+                    <td>${tarea.fecha_asignacion}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
     <div class="row g-4">
         <div class="col-md-6 col-lg-4">
             <div class="card bg-primary text-white">
@@ -100,33 +126,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Lista de tareas -->
-    <h2 class="mt-5">Lista de Tareas</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Descripción</th>
-                <th>Estado</th>
-                <th>Empleado Asignado</th>
-                <th>Fecha de Asignación</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="tarea" items="${listarTareas}">
-                <tr>
-                    <td>${tarea.id}</td>
-                    <td>${tarea.descripcion}</td>
-                    <td>${tarea.estado}</td>
-                    <td>${tarea.empleado_asignado}</td>
-                    <td>${tarea.fecha_asignacion}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
     </div>
 </div>
 <!-- Bootstrap JS (opcional para componentes interactivos) -->
