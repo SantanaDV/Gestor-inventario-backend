@@ -63,12 +63,20 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = userDetails.getUsername();
         Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
 
+        // Obtener el rol del usuario
+        String rol = roles.stream()
+                .map(GrantedAuthority::getAuthority)
+                .findFirst()
+                .orElse("ROLE_EMPLEADO"); // Por defecto, si no tiene rol, se asume empleado
+
         // Crea un mapa de claims para incluir en el token JWT
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
         claims.put("authorities", roles.stream()
                 .map(GrantedAuthority::getAuthority) // Obtiene el nombre del rol (por ejemplo, "ROLE_ADMIN")
                 .collect(Collectors.toList())); // Convierte los roles a una lista
+        claims.put("rol", rol); // Agregar el rol al token
+
 
         // Genera el token JWT con los claims, expiración y firma
         String token = Jwts.builder()

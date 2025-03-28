@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -38,10 +39,12 @@ public class JPAUserDetailsService implements UserDetailsService {
         }
         Usuario user = userOptional.get();
 
-        // Convertir los roles del usuario a GrantedAuthority
-        Set<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(rol -> new SimpleGrantedAuthority("ROLE_" + rol.name())) // Añadir prefijo "ROLE_"
-                .collect(Collectors.toSet());
+        // Convertir el rol del usuario a GrantedAuthority
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        String rol = user.getRol(); // Obtener el rol como String
+        if (rol != null && !rol.isEmpty()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + rol.toUpperCase())); // Añadir prefijo "ROLE_"
+        }
 
         // Determinar si el usuario está habilitado; se asume que 'estado' == 1 es activo
         boolean enabled = user.getEstado() == 1;
@@ -57,4 +60,7 @@ public class JPAUserDetailsService implements UserDetailsService {
                 authorities              // roles
         );
     }
+
 }
+
+
