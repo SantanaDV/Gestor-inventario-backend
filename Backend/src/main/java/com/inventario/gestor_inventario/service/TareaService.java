@@ -36,13 +36,7 @@ public interface TareaService {
      * Cuenta el total de tareas en Proceso
      * @return long
      */
-    long contarTareasEnProceso();
-
-    /**
-     * Cuenta el total de tareas Por hacer
-     * @return long
-     */
-    long contarTareasPorHacer();
+    List<Tarea> contarTareasEnProcesoPorHacer();
 
 
     /**
