@@ -21,12 +21,27 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public Producto CrearProducto(Producto producto) {
+    public Producto CrearActualizarProducto(Producto producto) {
         return productoRepository.save(producto);
     }
 
     @Override
     public void EliminarProducto(Producto producto) {
         productoRepository.deleteById(producto.getId_producto());
+    }
+
+    @Override
+    public long totalCantidadStock() {
+        return productoRepository.contarTotalCantidadStock();
+    }
+
+    @Override
+    public long totalProductosStockBajo() {
+        return productoRepository.contarTotalProductosStockBajo();
+    }
+
+    @Override
+    public long totalProductosStockCritico() {
+        return productoRepository.contarTotalProductosStockCritico();
     }
 }

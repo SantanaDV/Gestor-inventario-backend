@@ -64,4 +64,6 @@ public class UsuarioController {
     public String miPerfil(@RequestParam String email) {
         return usuarioController.obtenerUsuarioPorEmail(email);
     }
+
+
 }
