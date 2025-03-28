@@ -45,5 +45,12 @@ public interface ProductoService {
      */
     long totalProductosStockCritico();
 
+    /**
+     * Obtiene los datos de un producto en base al QR del mismo
+     * @param codigo_qr
+     * @return Objeto Producto
+     */
+    Producto obtenerProductoConQR(String codigo_qr);
+
 
 }

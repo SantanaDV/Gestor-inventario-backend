@@ -44,4 +44,11 @@ public class ProductoServiceImpl implements ProductoService {
     public long totalProductosStockCritico() {
         return productoRepository.contarTotalProductosStockCritico();
     }
+
+    @Override
+    public Producto obtenerProductoConQR(String codigo_qr) {
+        return productoRepository.buscarProductoConQR(codigo_qr);
+    }
+
+
 }
