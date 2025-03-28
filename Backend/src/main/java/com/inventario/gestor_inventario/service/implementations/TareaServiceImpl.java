@@ -35,17 +35,12 @@ public class TareaServiceImpl implements TareaService {
     }
 
     @Override
-    public long contarTareasEnProceso() {
-        return tareaRepository.contarNumeroTareasEnProceso();
+    public List<Tarea> contarTareasEnProcesoPorHacer() {
+        return tareaRepository.contarTareasEnProcesoPorHacer();
     }
 
     @Override
-    public long contarTareasPorHacer() {
-        return tareaRepository.contarNumeroTareasPorHacer();
-    }
-
-    @Override
-    public long contarTareasFinalizadas() {
+    public List<Tarea> contarTareasFinalizadas() {
         return tareaRepository.contarNumeroTareasFinalizadasHoy();
     }
 }

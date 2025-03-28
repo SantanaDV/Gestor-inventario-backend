@@ -24,5 +24,5 @@ public class Tarea {
     @ManyToMany // Relación muchos a uno con Usuario(empleado responsable)
     @JoinColumn(name = "empleado_asignado") // columna que almacena la clave foránea
     private String empleado_asignado;
-    private Date fecha_asignacion,fecha_creacion;
+    private Date fecha_asignacion,fecha_finalizacion;
 }

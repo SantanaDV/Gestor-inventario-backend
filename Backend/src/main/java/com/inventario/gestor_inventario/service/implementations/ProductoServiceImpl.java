@@ -36,12 +36,12 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public long totalProductosStockBajo() {
+    public List<Producto> totalProductosStockBajo() {
         return productoRepository.contarTotalProductosStockBajo();
     }
 
     @Override
-    public long totalProductosStockCritico() {
+    public List<Producto> totalProductosStockCritico() {
         return productoRepository.contarTotalProductosStockCritico();
     }
 }
