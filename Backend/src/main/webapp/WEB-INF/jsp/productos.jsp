@@ -46,7 +46,7 @@
     <tbody>
     <c:forEach var="producto" items="${listarProductos}">
         <tr>
-            <td>${producto.id_producto}</td>
+            <td>${producto.fecha}</td>
             <td>${producto.nombre}</td>
             <td>${producto.cantidad}</td>
             <td>${producto.estado}</td>
@@ -54,3 +54,4 @@
     </c:forEach>
     </tbody>
 </table>
+

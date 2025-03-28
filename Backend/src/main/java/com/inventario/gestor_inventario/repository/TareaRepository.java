@@ -14,8 +14,10 @@ public interface TareaRepository extends JpaRepository<Tarea, Integer> {
      *  Query en JPA que cuenta el total de tareas 'En Proceso'
      * @return long
      */
-    @Query("SELECT id,descripcion,empleado_asignado,fecha_asignacion FROM Tarea t WHERE t.estado = 'En Proceso' AND t.estado = 'Por hacer' ")
+    @Query("SELECT t FROM Tarea t WHERE t.estado = 'En Proceso' OR t.estado = 'Por hacer' ")
     List<Tarea> contarTareasEnProcesoPorHacer();
+
+
 
 
     /**

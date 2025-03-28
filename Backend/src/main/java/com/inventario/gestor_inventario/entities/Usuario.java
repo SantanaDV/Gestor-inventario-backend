@@ -28,6 +28,7 @@ public class Usuario {
     @Column(name = "rol", columnDefinition = "ENUM('admin', 'empleado')")
     private String rol;
 
+
     //nuevo añadido por Mónica
     @ElementCollection(fetch = FetchType.EAGER) // Para cargar los roles inmediatamente
     @Enumerated(EnumType.STRING) // Para almacenar los roles como cadenas

@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Table(name="lineas_pedido")
 @Data
@@ -35,5 +37,5 @@ public class LineasPedido {
 
     private String estado;
 
-
+    private Date fecha_salida;
 }

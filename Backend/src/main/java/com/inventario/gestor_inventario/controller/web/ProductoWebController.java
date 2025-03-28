@@ -28,7 +28,6 @@ public class ProductoWebController {
         model.addAttribute("stockCritico", stockCritico);
         model.addAttribute("listarProductos", productoService.listarProductos());
 
-
         return "productos";
     }
 }
