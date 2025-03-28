@@ -72,15 +72,15 @@
         <div class="col-md-6 col-lg-4">
             <div class="card bg-primary text-white">
                 <div class="card-body">
-                    <h5 class="card-title">Productos en stock</h5>
-                    <p class="card-text">Cantidad total de productos almacenados: ${totalStock}</p>
+                    <h5 class="card-title">Stock <u>total</u></h5>
+                    <p class="card-text">Cantidad total de productos almacenados: <u><b>${totalStock}</b></u></p>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
             <div class="card bg-warning text-white">
                 <div class="card-body">
-                    <h5 class="card-title">Productos <u>activos</u> con stock bajo</h5>
+                    <h5 class="card-title">Productos activos con <u>stock bajo</u></h5>
                     <div class="table-responsive">
                         <table class="table table-bordered mb-0">
                             <thead>
@@ -107,7 +107,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="card bg-danger text-white">
                 <div class="card-body">
-                    <h5 class="card-title">Productos con stock crítico</h5>
+                    <h5 class="card-title">Productos con <u>stock crítico</u></h5>
                     <div class="table-responsive">
                         <table class="table table-bordered mb-0">
                             <thead>
