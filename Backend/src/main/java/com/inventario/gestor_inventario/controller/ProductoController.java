@@ -24,6 +24,7 @@ public class ProductoController {
     }
 
     @GetMapping("/obtenerProductoQR/{codigo_qr}")
+    @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
     public Producto obtenerProductoPorQR(@PathVariable String codigo_qr){
         return productoServiceImpl.obtenerProductoConQR(codigo_qr);
     }
