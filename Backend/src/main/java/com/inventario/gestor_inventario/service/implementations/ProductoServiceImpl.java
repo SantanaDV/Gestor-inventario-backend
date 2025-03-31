@@ -5,6 +5,7 @@ import com.inventario.gestor_inventario.repository.CategoriasProductoRepository;
 import com.inventario.gestor_inventario.repository.ProductoRepository;
 import com.inventario.gestor_inventario.service.ProductoService;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<ProductoCatDTO> listarProductosCategorias() {
+    public List<ProductosCantCat> listarProductosCategorias() {
         return productoRepository.listarProductosCategorias();
     }
 }

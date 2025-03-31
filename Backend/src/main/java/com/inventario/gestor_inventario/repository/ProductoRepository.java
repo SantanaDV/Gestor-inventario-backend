@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.repository;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -40,10 +41,13 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
      */
     Producto findByCodigoQr(String codigo_qr);
 
-    @Query(value = "SELECT SUM(cantidad),categorias.descripcion FROM productos INNER JOIN categorias ON categorias.id = productos.id_categoria GROUP BY categorias.id",nativeQuery = true)
-    List<ProductoCatDTO> listarProductosCategorias();
 
-
+    /**
+     * Esto lo que hace es devolver cantidad de productos por categoria
+     * @return Objeto ProductoCanCat
+     */
+    @Query("SELECT new com.inventario.gestor_inventario.utilities.ProductosCantCat(SUM(p.cantidad), c.descripcion) FROM Producto p INNER JOIN p.categoria c GROUP BY c.id")
+    List<ProductosCantCat> listarProductosCategorias();
     /**
      * Consulta que te retorna los productos que han entrado desde hace dos dias hasta el dia de hoy
      * @return List<Producto>

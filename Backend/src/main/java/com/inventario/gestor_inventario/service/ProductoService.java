@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 
 import java.util.List;
@@ -68,5 +69,5 @@ public interface ProductoService {
      */
     List<ProductosSalEntDTO>listarProductosSalientesRecientes();
 
-    List<ProductoCatDTO>listarProductosCategorias();
+    List<ProductosCantCat>listarProductosCategorias();
 }

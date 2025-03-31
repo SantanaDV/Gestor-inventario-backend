@@ -29,5 +29,4 @@ public class ProductoCatDTO {
     private Date fecha_creacion;
 
     private String nfc_id;
-
 }
