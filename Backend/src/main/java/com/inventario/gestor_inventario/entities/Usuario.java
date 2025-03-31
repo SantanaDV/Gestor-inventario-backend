@@ -1,6 +1,8 @@
 package com.inventario.gestor_inventario.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.inventario.gestor_inventario.utilities.ProductoIdSerializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,6 +31,16 @@ public class Usuario {
     @Column(unique = true)
     private String email;
     private int estado;
+
+    private Date fechaAlta, fecha_baja;
+    @Column(name = "rol", columnDefinition = "ENUM('admin', 'empleado')")
+    private String rol;
+    @Transient
+    @JsonIgnore
+    public Optional<Object> getRoles() {
+        return getRoles();
+    }
+
 
     public String getContraseña() {
         return contraseña;
@@ -94,13 +106,6 @@ public class Usuario {
         this.rol = rol;
     }
 
-    private Date fechaAlta, fecha_baja;
-    @Column(name = "rol", columnDefinition = "ENUM('admin', 'empleado')")
-    private String rol;
-    @Transient
-    @JsonIgnore
-    public Optional<Object> getRoles() {
-        return getRoles();
-    }
+
 }
 

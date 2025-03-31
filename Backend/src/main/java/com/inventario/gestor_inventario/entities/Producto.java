@@ -35,4 +35,8 @@ public class Producto {
 
         @Column(name = "nfc_id", unique = true)
         private String nfc_id;
+
+        @ManyToOne
+        @JoinColumn(name = "id_categoria", nullable = false)
+        private Categoria categoria;
 }

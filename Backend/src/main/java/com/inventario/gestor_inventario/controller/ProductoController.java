@@ -3,6 +3,7 @@ package com.inventario.gestor_inventario.controller;
 import com.inventario.gestor_inventario.entities.Pedido;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
+import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +31,12 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto CrearProducto(@RequestBody Producto producto) {
+    public Producto CrearProducto(@RequestBody ProductoCatDTO producto) {
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
 
     @PutMapping
-    public Producto ActualizarProducto(@RequestBody Producto producto) {
+    public Producto ActualizarProducto(@RequestBody ProductoCatDTO producto) {
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
 

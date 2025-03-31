@@ -1,6 +1,7 @@
 package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Producto;
+import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface ProductoService {
      * @param producto encarga de crear un poducto
      * @return Producto crearProducto
      */
-    Producto CrearActualizarProducto(Producto producto);
+    Producto CrearActualizarProducto(ProductoCatDTO producto);
 
 
     /**
@@ -38,7 +39,7 @@ public interface ProductoService {
      * Retorna la cantidad total de productos con stock bajo
      * @return long
      */
-        List<Producto> totalProductosStockBajo();
+    List<Producto> totalProductosStockBajo();
 
     /**
      * Retorna la cantidad total de productos con stock critico
