@@ -14,7 +14,7 @@
         flex-wrap:wrap;
         align-items: center;
         justify-content: center;
-        margin: 10px;
+        margin-bottom: 10px;
     }
     canvas{
         width: 80% !important;
@@ -23,7 +23,7 @@
     #graficos2 canvas{
         width: 30% !important;
         flex-direction: row;
-        gap: 40px;
+        gap: 20px;
         justify-content: space-between;
     }
     #graficos2 #myChart2{
@@ -44,8 +44,20 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+
     const labels = [];
     const data = [];
+
+
 
     <c:forEach var="entry" items="${mapaDatos}">
     labels.push('<c:out value="${entry.key}" />');
@@ -59,7 +71,7 @@
         data: {
             labels: labels,
             datasets: [{
-                label: '# of Votes',
+                label: 'Stock por Categoria',
                 data: data,
                 borderWidth: 1
             }]
@@ -83,7 +95,7 @@
         data: {
             labels: labels,
             datasets: [{
-                label: 'Distribución',
+                label: 'Distribucion de productos',
                 data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.6)',   // Rojo
@@ -130,50 +142,56 @@
             }
         }
     });
-
-    ////Grafico 3////
     const labels2 = [];
     const data2 = [];
-    const descriptions = [];
+    const descripciones = [];
+    const ctx = document.getElementById('myChart2').getContext('2d');
 
-    <c:forEach var="producto" items="${listarProductosMes}">
-    labels2.push('<c:out value="${producto.mes}" />');
-    data2.push(${producto.cantidad});  // Asegúrate de que `cantidad` sea un número
-    descriptions.push('<c:out value="${producto.descripcion}" />');
+    <c:forEach var="entry" items="${meses}">
+    labels2.push('<c:out value="${entry}" />');
     </c:forEach>
 
-    // Ahora puedes usar estos arrays para crear el gráfico
-    const ctx3 = document.getElementById('myChart2');
-    new Chart(ctx3, {
+    <c:forEach var="entry" items="${cantidades}">
+        data2.push('<c:out value="${entry}" />');
+    </c:forEach>
+
+    <c:forEach var="entry" items="${descripciones}">
+        descripciones.push('<c:out value="${entry}" />');
+    </c:forEach>
+
+
+
+    const datasets = descripciones.map((descripcion, index) => ({
+        label: descripcion,
+        data: data2,  // Se usa el array de cantidades
+        borderColor: getRandomColor(),
+        backgroundColor: getRandomColor() + '80',
+        borderWidth: 2,
+        fill: true
+    }));
+
+
+    new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels2,
-            datasets: [{
-                label: 'Cantidad por mes',
-                data: data2,
-                borderColor: 'rgb(255,51,0)',
-                backgroundColor: 'rgba(84,255,0,0.2)',
-                borderWidth: 2,
-                fill: true
-            }]
+            datasets: datasets
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
+                x: {
+                    beginAtZero: true
+                },
                 y: {
                     beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        font: {
-                            size: 25  // Aumenta el tamaño de las etiquetas de la leyenda
-                        }
-                    }
                 }
             }
         }
     });
+
+
 
 </script>
 
