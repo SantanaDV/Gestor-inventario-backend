@@ -67,4 +67,6 @@ public interface ProductoService {
      * @return List<Producto>
      */
     List<ProductosSalEntDTO>listarProductosSalientesRecientes();
+
+    List<ProductoCatDTO>listarProductosCategorias();
 }

@@ -73,4 +73,9 @@ public class ProductoServiceImpl implements ProductoService {
     public List<ProductosSalEntDTO> listarProductosSalientesRecientes() {
         return productoRepository.listarProductosSalientesRecientes();
     }
+
+    @Override
+    public List<ProductoCatDTO> listarProductosCategorias() {
+        return productoRepository.listarProductosCategorias();
+    }
 }

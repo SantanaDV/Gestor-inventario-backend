@@ -1,6 +1,7 @@
 package com.inventario.gestor_inventario.repository;
 
 import com.inventario.gestor_inventario.entities.Producto;
+import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,7 +40,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
      */
     Producto findByCodigoQr(String codigo_qr);
 
-
+    @Query(value = "SELECT SUM(cantidad),categorias.descripcion FROM productos INNER JOIN categorias ON categorias.id = productos.id_categoria GROUP BY categorias.id",nativeQuery = true)
+    List<ProductoCatDTO> listarProductosCategorias();
 
 
     /**
