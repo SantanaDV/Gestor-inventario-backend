@@ -4,6 +4,7 @@ import com.inventario.gestor_inventario.entities.Categoria;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductoMesDTO;
 import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,36 @@ public class IndexWebController {
 
     @GetMapping
     public String returnIndex(Model model) {
+        Map<String,Long> mapa = retornarMapa1();
+        model.addAttribute("mapaDatos", mapa);
+        retornarMapa2(model);
+        return "index";
+    }
+
+
+    private Map<String,Long> retornarMapa1(){
         List<ProductosCantCat>listarProductosCatDTO = productoService.listarProductosCategorias();
         Map<String,Long> mapa = new HashMap<>();
         for (ProductosCantCat producto : listarProductosCatDTO)
             mapa.put(producto.getDescripcion(), producto.getCantidad());
-        model.addAttribute("mapaDatos", mapa);
-        return "index";
+        return mapa;
     }
+    private void retornarMapa2(Model model){
+        List<ProductoMesDTO> listarProductosMes = productoService.listarProductosMes();
+
+        List<Long> cantidades = new ArrayList<>();
+        List<String> meses = new ArrayList<>();
+        List<String> descripciones = new ArrayList<>();
+
+        for (ProductoMesDTO producto : listarProductosMes) {
+            cantidades.add(producto.getCantidad());
+            meses.add(producto.getMes());
+            descripciones.add(producto.getDescripcion());
+        }
+
+        model.addAttribute("cantidades", cantidades);
+        model.addAttribute("meses", meses);
+        model.addAttribute("descripciones", descripciones);
+    }
+
 }

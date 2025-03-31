@@ -86,12 +86,26 @@
                 label: 'Distribución',
                 data: data,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',
-                    'rgba(54, 162, 235, 0.6)',
-                    'rgba(255, 206, 86, 0.6)',
-                    'rgba(75, 192, 192, 0.6)',
-                    'rgba(153, 102, 255, 0.6)',
-                    'rgba(255, 159, 64, 0.6)'
+                    'rgba(255, 99, 132, 0.6)',   // Rojo
+                    'rgba(54, 162, 235, 0.6)',   // Azul
+                    'rgba(255, 206, 86, 0.6)',   // Amarillo
+                    'rgba(75, 192, 192, 0.6)',   // Verde agua
+                    'rgba(153, 102, 255, 0.6)',  // Púrpura
+                    'rgba(255, 159, 64, 0.6)',   // Naranja
+                    'rgba(199, 199, 199, 0.6)',  // Gris
+                    'rgba(83, 102, 255, 0.6)',   // Azul violeta
+                    'rgba(255, 102, 178, 0.6)',  // Rosa
+                    'rgba(204, 255, 102, 0.6)',  // Verde lima
+                    'rgba(102, 255, 255, 0.6)',  // Celeste
+                    'rgba(255, 153, 102, 0.6)',  // Salmón
+                    'rgba(153, 255, 204, 0.6)',  // Verde menta
+                    'rgba(255, 102, 102, 0.6)',  // Rojo claro
+                    'rgba(102, 102, 255, 0.6)',  // Azul oscuro
+                    'rgba(178, 102, 255, 0.6)',  // Lila
+                    'rgba(255, 204, 102, 0.6)',  // Mostaza
+                    'rgba(102, 255, 178, 0.6)',  // Verde turquesa
+                    'rgba(255, 102, 229, 0.6)',  // Magenta
+                    'rgba(102, 178, 255, 0.6)'   // Azul cielo
                 ],
                 borderWidth: 1
             }]
@@ -117,17 +131,28 @@
         }
     });
 
-    // Gráfico de Línea (opcional)
+    ////Grafico 3////
+    const labels2 = [];
+    const data2 = [];
+    const descriptions = [];
+
+    <c:forEach var="producto" items="${listarProductosMes}">
+    labels2.push('<c:out value="${producto.mes}" />');
+    data2.push(${producto.cantidad});  // Asegúrate de que `cantidad` sea un número
+    descriptions.push('<c:out value="${producto.descripcion}" />');
+    </c:forEach>
+
+    // Ahora puedes usar estos arrays para crear el gráfico
     const ctx3 = document.getElementById('myChart2');
     new Chart(ctx3, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: labels2,
             datasets: [{
-                label: 'Tendencia',
-                data: data,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                label: 'Cantidad por mes',
+                data: data2,
+                borderColor: 'rgb(255,51,0)',
+                backgroundColor: 'rgba(84,255,0,0.2)',
                 borderWidth: 2,
                 fill: true
             }]
@@ -149,6 +174,7 @@
             }
         }
     });
+
 </script>
 
 </body>

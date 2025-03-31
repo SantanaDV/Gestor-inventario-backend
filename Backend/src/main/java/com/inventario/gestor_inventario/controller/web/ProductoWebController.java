@@ -2,6 +2,10 @@ package com.inventario.gestor_inventario.controller.web;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
+import jakarta.persistence.ColumnResult;
+import jakarta.persistence.ConstructorResult;
+import jakarta.persistence.Entity;
+import jakarta.persistence.SqlResultSetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import java.util.List;
 @RequestMapping("/productosWeb")
 //Si queremos restringir el acceso por Roles
 // @PreAuthorize("hasRole('ADMIN')")
+
 public class ProductoWebController {
 
     @Autowired

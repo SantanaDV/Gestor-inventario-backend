@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.repository;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductoMesDTO;
 import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -57,5 +58,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query(value ="SELECT pe.fecha,p.nombre,lp.cantidad,p.estado  FROM productos p INNER JOIN lineas_pedido lp ON lp.id_producto = p.id INNER JOIN pedidos pe ON pe.id = lp.id_pedido WHERE pe.tipo = 2 AND pe.fecha >= CURRENT_DATE - INTERVAL 2 DAY ", nativeQuery = true)
     List<ProductosSalEntDTO> listarProductosSalientesRecientes();
+
+    //@Query(value="SELECT SUM(p.cantidad) AS total_cantidad, DATE_FORMAT(p.fecha_creacion, '%M %Y') AS mes,  c.descripcion FROM productos p INNER JOIN categorias c ON c.id = p.id_categoria GROUP BY mes, c.descripcion ORDER BY c.descripcion DESC",nativeQuery = true);
+    List<ProductoMesDTO> listarProductosMes();
+
+
 
 }

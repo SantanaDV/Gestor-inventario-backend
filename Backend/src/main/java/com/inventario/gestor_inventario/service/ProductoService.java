@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import com.inventario.gestor_inventario.utilities.ProductoMesDTO;
 import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 
@@ -69,5 +70,15 @@ public interface ProductoService {
      */
     List<ProductosSalEntDTO>listarProductosSalientesRecientes();
 
+    /**
+     * Retorna las categorias y las cantidades de cada una
+     * @return List<ProductosCantCat> retorna productos con sus cantidades
+     */
     List<ProductosCantCat>listarProductosCategorias();
+
+    /**
+     * Retorna el stock de productos por cada mes
+     * @return List<Producto>
+     */
+    List<ProductoMesDTO>listarProductosMes();
 }
