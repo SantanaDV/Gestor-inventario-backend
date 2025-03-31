@@ -68,6 +68,5 @@ public interface ProductoService {
      */
     List<ProductosSalEntDTO>listarProductosSalientesRecientes();
 
-
-
+    List<ProductoCatDTO>listarProductosCategorias();
 }
