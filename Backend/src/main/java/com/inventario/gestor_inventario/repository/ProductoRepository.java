@@ -59,8 +59,17 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Query(value ="SELECT pe.fecha,p.nombre,lp.cantidad,p.estado  FROM productos p INNER JOIN lineas_pedido lp ON lp.id_producto = p.id INNER JOIN pedidos pe ON pe.id = lp.id_pedido WHERE pe.tipo = 2 AND pe.fecha >= CURRENT_DATE - INTERVAL 2 DAY ", nativeQuery = true)
     List<ProductosSalEntDTO> listarProductosSalientesRecientes();
 
-    //@Query(value="SELECT SUM(p.cantidad) AS total_cantidad, DATE_FORMAT(p.fecha_creacion, '%M %Y') AS mes,  c.descripcion FROM productos p INNER JOIN categorias c ON c.id = p.id_categoria GROUP BY mes, c.descripcion ORDER BY c.descripcion DESC",nativeQuery = true);
+    @Query(value = "SELECT CAST(SUM(p.cantidad) AS SIGNED) * 1 AS total_cantidad, " +
+            "DATE_FORMAT(p.fecha_creacion, '%M %Y') AS mes, " +
+            "c.descripcion AS descripcion " +
+            "FROM productos p " +
+            "INNER JOIN categorias c ON c.id = p.id_categoria " +
+            "GROUP BY mes, descripcion " +
+            "ORDER BY descripcion DESC", nativeQuery = true)
     List<ProductoMesDTO> listarProductosMes();
+
+
+
 
 
 

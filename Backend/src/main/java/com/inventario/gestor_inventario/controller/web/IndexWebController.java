@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,12 +42,12 @@ public class IndexWebController {
     private void retornarMapa2(Model model){
         List<ProductoMesDTO> listarProductosMes = productoService.listarProductosMes();
 
-        List<Long> cantidades = new ArrayList<>();
+        List<BigInteger> cantidades = new ArrayList<>();
         List<String> meses = new ArrayList<>();
         List<String> descripciones = new ArrayList<>();
 
         for (ProductoMesDTO producto : listarProductosMes) {
-            cantidades.add(producto.getCantidad());
+            cantidades.add(producto.getTotalCantidad());
             meses.add(producto.getMes());
             descripciones.add(producto.getDescripcion());
         }
