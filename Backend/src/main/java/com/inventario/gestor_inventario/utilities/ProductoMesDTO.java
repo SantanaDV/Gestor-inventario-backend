@@ -10,12 +10,10 @@ import java.math.BigInteger;
 public class ProductoMesDTO {
     private BigInteger totalCantidad;
     private String mes;
-    private String descripcion;
 
     // Constructor que acepta cualquier tipo numérico y lo convierte a BigInteger
-    public ProductoMesDTO(Number totalCantidad, String mes, String descripcion) {
+    public ProductoMesDTO(Number totalCantidad, String mes) {
         this.totalCantidad = BigInteger.valueOf(totalCantidad.longValue());
         this.mes = mes;
-        this.descripcion = descripcion;
     }
 }

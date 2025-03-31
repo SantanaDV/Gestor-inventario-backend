@@ -44,17 +44,14 @@ public class IndexWebController {
 
         List<BigInteger> cantidades = new ArrayList<>();
         List<String> meses = new ArrayList<>();
-        List<String> descripciones = new ArrayList<>();
 
         for (ProductoMesDTO producto : listarProductosMes) {
             cantidades.add(producto.getTotalCantidad());
             meses.add(producto.getMes());
-            descripciones.add(producto.getDescripcion());
         }
 
         model.addAttribute("cantidades", cantidades);
         model.addAttribute("meses", meses);
-        model.addAttribute("descripciones", descripciones);
     }
 
 }

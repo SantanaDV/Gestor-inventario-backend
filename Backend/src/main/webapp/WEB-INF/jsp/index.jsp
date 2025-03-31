@@ -144,7 +144,6 @@
     });
     const labels2 = [];
     const data2 = [];
-    const descripciones = [];
     const ctx = document.getElementById('myChart2').getContext('2d');
 
     <c:forEach var="entry" items="${meses}">
@@ -152,30 +151,21 @@
     </c:forEach>
 
     <c:forEach var="entry" items="${cantidades}">
-        data2.push('<c:out value="${entry}" />');
+    data2.push('<c:out value="${entry}" />');
     </c:forEach>
-
-    <c:forEach var="entry" items="${descripciones}">
-        descripciones.push('<c:out value="${entry}" />');
-    </c:forEach>
-
-
-
-    const datasets = descripciones.map((descripcion, index) => ({
-        label: descripcion,
-        data: data2,  // Se usa el array de cantidades
-        borderColor: getRandomColor(),
-        backgroundColor: getRandomColor() + '80',
-        borderWidth: 2,
-        fill: true
-    }));
-
 
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels2,
-            datasets: datasets
+            datasets: [{
+                label: 'Evolucion de Stock',
+                data: data2,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                borderWidth: 2,
+                fill: true
+            }]
         },
         options: {
             responsive: true,
@@ -190,7 +180,6 @@
             }
         }
     });
-
 
 
 </script>
