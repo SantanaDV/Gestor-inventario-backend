@@ -73,7 +73,9 @@
             datasets: [{
                 label: 'Stock por Categoria',
                 data: data,
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor : '#FF6961',
+                borderColor: 'black'
             }]
         },
         options: {
@@ -159,10 +161,10 @@
         data: {
             labels: labels2,
             datasets: [{
-                label: 'Evolucion de Stock',
+                label: 'Evolucion Total Stock/Mes',
                 data: data2,
-                borderColor: 'blue',
-                backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                borderColor: 'black',
+                backgroundColor: '#FF6961',
                 borderWidth: 2,
                 fill: true
             }]
