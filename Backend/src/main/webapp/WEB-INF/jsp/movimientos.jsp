@@ -16,56 +16,69 @@
 <body>
     <%@ include file="./components/header.jsp" %>
     <div class="container my-5">
-        <h1 class="text-center">Movimientos</h1>
-
-        <h2 class="mt-5 fw-light">Lista de Productos Entrantes</h2>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class='bg-dark text-white'>Fecha de Entrada</th>
-                        <th class='bg-dark text-white'>Nombre</th>
-                        <th class='bg-dark text-white'>Cantidad</th>
-                        <th class='bg-dark text-white'>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="producto" items="${productosEntrantes}">
+                 <h1 class="text-center">
+                 <c:choose>
+                 <c:when test="${not empty productosEntrantes or not empty productosSalientes}">
+                        Movimientos
+                 </c:when>
+                 <c:otherwise>
+                        Sin movimientos 😔
+                 </c:otherwise>
+                </c:choose>
+                </h1>
+        <c:if test="${not empty productosEntrantes}">
+            <h2 class="mt-5 fw-light">Lista de Productos Entrantes</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>${producto.fecha}</td>
-                            <td>${producto.nombre}</td>
-                            <td>${producto.cantidad}</td>
-                            <td>${producto.estado}</td>
+                            <th class='bg-dark text-white'>Fecha de Entrada</th>
+                            <th class='bg-dark text-white'>Nombre</th>
+                            <th class='bg-dark text-white'>Cantidad</th>
+                            <th class='bg-dark text-white'>Estado</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="producto" items="${productosEntrantes}">
+                            <tr>
+                                <td>${producto.fecha}</td>
+                                <td>${producto.nombre}</td>
+                                <td>${producto.cantidad}</td>
+                                <td>${producto.estado}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
 
-        <h2 class="mt-5 fw-light">Lista de Productos Salientes</h2>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class='bg-black text-white'>Fecha de Entrada</th>
-                        <th class='bg-black text-white'>Nombre</th>
-                        <th class='bg-black text-white'>Cantidad</th>
-                        <th class='bg-black text-white'>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="producto" items="${productosSalientes}">
+        <c:if test="${not empty productosSalientes}">
+            <h2 class="mt-5 fw-light">Lista de Productos Salientes</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>${producto.fecha}</td>
-                            <td>${producto.nombre}</td>
-                            <td>${producto.cantidad}</td>
-                            <td>${producto.estado}</td>
+                            <th class='bg-black text-white'>Fecha de Entrada</th>
+                            <th class='bg-black text-white'>Nombre</th>
+                            <th class='bg-black text-white'>Cantidad</th>
+                            <th class='bg-black text-white'>Estado</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="producto" items="${productosSalientes}">
+                            <tr>
+                                <td>${producto.fecha}</td>
+                                <td>${producto.nombre}</td>
+                                <td>${producto.cantidad}</td>
+                                <td>${producto.estado}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </c:if>
     </div>
+
     <!-- Bootstrap JS (opcional para componentes interactivos) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

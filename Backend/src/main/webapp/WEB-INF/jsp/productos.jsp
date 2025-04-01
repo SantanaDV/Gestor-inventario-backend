@@ -43,67 +43,75 @@
     </div>
     <div class="row g-4">
         <div class="col-md-6 col-lg-4">
-            <div class="card bg-primary text-white">
+            <div class="card bg-primary text-white" style="background-color: #D55A50!important; opacity: 1.2;">
                 <div class="card-body">
                     <h5 class="card-title">Stock <u>total</u></h5>
                     <p class="card-text">Cantidad total de productos almacenados: <u><b>${totalStock}</b></u></p>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card bg-warning text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Productos activos con <u>stock bajo</u></h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                            <tr>
-                                <th class='bg-dark text-white'>ID</th>
-                                <th class='bg-dark text-white'>Nombre</th>
-                                <th class='bg-dark text-white'>Cantidad</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="producto1" items="${stockBajo}">
-                                <tr>
-                                    <td>${producto1.id_producto}</td>
-                                    <td>${producto1.nombre}</td>
-                                    <td>${producto1.cantidad}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+        <!-- Productos activos con stock bajo -->
+        <c:if test="${not empty stockBajo}">
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white" style="background-color: #D55A50!important; opacity: 1.2;">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos activos con <u>stock bajo</u></h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class='bg-dark text-white'>ID</th>
+                                        <th class='bg-dark text-white'>Nombre</th>
+                                        <th class='bg-dark text-white'>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="producto1" items="${stockBajo}">
+                                        <tr>
+                                            <td>${producto1.id_producto}</td>
+                                            <td>${producto1.nombre}</td>
+                                            <td>${producto1.cantidad}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card bg-danger text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Productos con <u>stock crítico</u></h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                            <tr>
-                                <th class='bg-dark text-white'>ID</th>
-                                <th class='bg-dark text-white'>Nombre</th>
-                                <th class='bg-dark text-white'>Cantidad</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="producto2" items="${stockCritico}">
-                                <tr>
-                                    <td>${producto2.id_producto}</td>
-                                    <td>${producto2.nombre}</td>
-                                    <td>${producto2.cantidad}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+        </c:if>
+
+        <!-- Productos con stock crítico -->
+        <c:if test="${not empty stockCritico}">
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white" style="background-color: #D55A50!important; opacity: 1.2;">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos con <u>stock crítico</u></h5>
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class='bg-dark text-white'>ID</th>
+                                        <th class='bg-dark text-white'>Nombre</th>
+                                        <th class='bg-dark text-white'>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="producto2" items="${stockCritico}">
+                                        <tr>
+                                            <td>${producto2.id_producto}</td>
+                                            <td>${producto2.nombre}</td>
+                                            <td>${producto2.cantidad}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </c:if>
+
     </div>
 </div>
 <!-- Bootstrap JS (opcional para componentes interactivos) -->
