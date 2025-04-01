@@ -1,10 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="./components/header.jsp" %>
-
-<div class="container mt-5">
-    <!-- Este lugar se actualizará con el contenido específico para cada página -->
-</div>
-
 <style>
     div {
         display: flex;
@@ -14,7 +10,6 @@
         flex-wrap:wrap;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10px;
     }
     canvas{
         width: 80% !important;
@@ -28,7 +23,7 @@
     }
     #graficos2 #myChart2{
         align-self: end;
-        width: 50% !important;
+        width: 60% !important;
     }
 
 </style>
@@ -110,8 +105,8 @@
                 legend: {
                     labels: {
                         font: {
-                            size: 15  // Aumenta el tamaño de las etiquetas de la leyenda
-                        }
+                            size: 20  // Aumenta el tamaño de las etiquetas de la leyenda
+                        },
                     }
                 },
                 tooltip: {
@@ -144,20 +139,39 @@
                 label: 'Evolucion Total Stock/Mes',
                 data: data2,
                 borderColor: 'black',
-                backgroundColor: '#FF6961',
-                borderWidth: 2,
+                backgroundColor: '#D55A50', // Color más oscuro de #FF6961
+                borderWidth: 3, // Línea más gruesa
+                pointRadius: 6, // Aumenta los puntos en la línea
+                pointHoverRadius: 8, // Puntos más grandes al hacer hover
                 fill: true
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 20 // Aumenta el tamaño de la leyenda
+                        },
+                    }
+                }
+            },
             scales: {
                 x: {
-                    beginAtZero: true
+                    ticks: {
+                        font: {
+                            size: 20 // Aumenta el tamaño de los textos en X
+                        }
+                    }
                 },
                 y: {
-                    beginAtZero: true
+                    ticks: {
+                        font: {
+                            size: 20 // Aumenta el tamaño de los textos en Y
+                        }
+                    }
                 }
             }
         }
