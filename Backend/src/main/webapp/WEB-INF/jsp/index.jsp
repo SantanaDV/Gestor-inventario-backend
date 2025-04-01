@@ -45,10 +45,10 @@
 
 <script>
     function getRandomColor() {
-        const letters = '0123456789ABCDEF';
+        const letters = '89ABCDEF'; // Solo usa valores altos para tonos claros
         let color = '#';
         for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
+            color += letters[Math.floor(Math.random() * letters.length)];
         }
         return color;
     }
@@ -56,12 +56,13 @@
 
     const labels = [];
     const data = [];
-
+    const colores=[];
 
 
     <c:forEach var="entry" items="${mapaDatos}">
     labels.push('<c:out value="${entry.key}" />');
     data.push(<c:out value="${entry.value}" />);
+    colores.push(getRandomColor());
     </c:forEach>
 
     // Gráfico de Barras
@@ -99,28 +100,7 @@
             datasets: [{
                 label: 'Distribucion de productos',
                 data: data,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)',   // Rojo
-                    'rgba(54, 162, 235, 0.6)',   // Azul
-                    'rgba(255, 206, 86, 0.6)',   // Amarillo
-                    'rgba(75, 192, 192, 0.6)',   // Verde agua
-                    'rgba(153, 102, 255, 0.6)',  // Púrpura
-                    'rgba(255, 159, 64, 0.6)',   // Naranja
-                    'rgba(199, 199, 199, 0.6)',  // Gris
-                    'rgba(83, 102, 255, 0.6)',   // Azul violeta
-                    'rgba(255, 102, 178, 0.6)',  // Rosa
-                    'rgba(204, 255, 102, 0.6)',  // Verde lima
-                    'rgba(102, 255, 255, 0.6)',  // Celeste
-                    'rgba(255, 153, 102, 0.6)',  // Salmón
-                    'rgba(153, 255, 204, 0.6)',  // Verde menta
-                    'rgba(255, 102, 102, 0.6)',  // Rojo claro
-                    'rgba(102, 102, 255, 0.6)',  // Azul oscuro
-                    'rgba(178, 102, 255, 0.6)',  // Lila
-                    'rgba(255, 204, 102, 0.6)',  // Mostaza
-                    'rgba(102, 255, 178, 0.6)',  // Verde turquesa
-                    'rgba(255, 102, 229, 0.6)',  // Magenta
-                    'rgba(102, 178, 255, 0.6)'   // Azul cielo
-                ],
+                backgroundColor:colores,
                 borderWidth: 1
             }]
         },
@@ -182,9 +162,6 @@
             }
         }
     });
-
-
 </script>
-
 </body>
 </html>
