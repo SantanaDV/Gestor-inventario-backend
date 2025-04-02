@@ -24,14 +24,14 @@ public class UsuarioController {
 
 
 
-    // Endpoint protegido para administradores
+    // Endpoint protegido para administradores de prueba
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String admin() {
         return "Bienvenido, administrador!";
     }
 
-    // Endpoint protegido para empleados
+    // Endpoint protegido para empleados de prueba
     @GetMapping("/empleado")
     @PreAuthorize("hasRole('EMPLEADO') and hasRole('ADMIN')")
     public String empleado() {
@@ -40,7 +40,7 @@ public class UsuarioController {
 
     // Endpoint protegido para usuarios administrador (listar usuarios)
     @GetMapping("/admin/listarUsuarios")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public List<Usuario> ListarUsuarios() {
         return usuarioController.ListarUsuarios();
     }
