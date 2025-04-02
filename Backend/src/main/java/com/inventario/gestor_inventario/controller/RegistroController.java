@@ -25,7 +25,7 @@ public class RegistroController {
     // Endpoint público para registro
     @PostMapping
     public Usuario CrearUsuario(@RequestBody Usuario usuario) {
-        if(usuario.getRol() == null || usuario.getRol() == "ROLE_EMPLEADO"){
+        if(usuario.getRol() == null || usuario.getRol().equals("ROLE_EMPLEADO")){
             usuario.setRol("empleado");
         }
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
