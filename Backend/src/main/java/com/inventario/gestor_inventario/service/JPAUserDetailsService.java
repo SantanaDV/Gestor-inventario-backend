@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class JPAUserDetailsService implements UserDetailsService {
@@ -52,7 +50,7 @@ public class JPAUserDetailsService implements UserDetailsService {
         // Crear y retornar el UserDetails con los datos del usuario
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),         // username
-                user.getContraseña(),    // password (almacenada encriptada)
+                user.getContrasena(),    // password (almacenada encriptada)
                 enabled,                 // enabled
                 true,                    // accountNonExpired
                 true,                    // credentialsNonExpired

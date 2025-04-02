@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
         // Crea un token de autenticación con el email y la contraseña del usuario
         UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getContraseña());
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getContrasena());
         // Autentica al usuario utilizando el AuthenticationManager
         return authenticationManager.authenticate(authToken);
     }

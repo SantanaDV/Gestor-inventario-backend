@@ -26,9 +26,9 @@ public class RegistroController {
     @PostMapping
     public Usuario CrearUsuario(@RequestBody Usuario usuario) {
         if(usuario.getRol() == null){
-            usuario.setRol("empleado");
+            usuario.setRol("EMPLEADO");
         }
-        usuario.setContraseña(passwordEncoder.encode(usuario.getContraseña()));
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         Date tiempo = new Date();
         usuario.setFechaAlta(tiempo);
         return this.usuarioController.CrearActualizarUsuario(usuario);
