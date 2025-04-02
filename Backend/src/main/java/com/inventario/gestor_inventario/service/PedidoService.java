@@ -22,8 +22,10 @@ public interface PedidoService {
 
     /**
      * Elimino los pedidos
+     *
      * @param id un parametro de entrada
+     * @return
      */
-    void EliminarPedido(int id);
+    int EliminarPedido(int id);
 
 }

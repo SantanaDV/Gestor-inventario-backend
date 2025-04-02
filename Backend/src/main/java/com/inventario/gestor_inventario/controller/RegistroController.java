@@ -19,19 +19,25 @@ public class RegistroController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public RegistroController(UsuarioServiceImpl usuario){
+    public RegistroController(UsuarioServiceImpl usuario) {
         this.usuarioController = usuario;
     }
+
     // Endpoint público para registro
     @PostMapping
     public Usuario CrearUsuario(@RequestBody Usuario usuario) {
-        if(usuario.getRol() == null || usuario.getRol().equals("ROLE_EMPLEADO")){
+        if (usuario.getRol() == null || usuario.getRol().equals("ROLE_EMPLEADO")) {
             usuario.setRol("empleado");
+            if (usuario.getRol() == null) {
+                usuario.setRol("EMPLEADO");
+            }
+            usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+            Date tiempo = new Date();
+            usuario.setFechaAlta(tiempo);
+            usuario.setEstado(1);
+            return this.usuarioController.CrearActualizarUsuario(usuario);
         }
-        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
-        Date tiempo = new Date();
-        usuario.setFechaAlta(tiempo);
-        usuario.setEstado(1);
-        return this.usuarioController.CrearActualizarUsuario(usuario);
+        return usuario;
     }
 }
+

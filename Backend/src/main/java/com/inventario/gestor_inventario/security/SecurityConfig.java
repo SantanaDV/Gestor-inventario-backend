@@ -1,6 +1,5 @@
 package com.inventario.gestor_inventario.security;
 
-import com.inventario.gestor_inventario.service.implementations.UsuarioServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,18 +20,18 @@ import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@EnableMethodSecurity
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
 @Configuration
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
-    // Constructor para inyectar el UserDetailsService
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
-    // Configuración principal de seguridad
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    JwtAuthenticationFilter jwtAuthenticationFilter,
@@ -44,10 +43,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Rutas públicas (acceso sin autenticación)
                         .requestMatchers("/**").permitAll()
-                        .requestMatchers("/login").permitAll() // Permitir acceso al endpoint de login
-                        .requestMatchers("/registro").permitAll() // Permitir acceso al endpoint de registro
                         .requestMatchers("/tareasWeb").permitAll()
                         .requestMatchers("/productosWeb").permitAll()
+                        // Rutas públicas (acceso sin autenticación)
+
                         // Cualquier otra ruta requiere autenticación
                         .requestMatchers("/login", "/registro").permitAll()
                         .requestMatchers("/api/usuario/admin").hasRole("ADMIN")
@@ -55,42 +54,35 @@ public class SecurityConfig {
                         .requestMatchers("/api/usuario/empleado").hasRole("EMPLEADO")
                         .anyRequest().authenticated()
                 )
-                .addFilter(jwtAuthenticationFilter) // Añade el filtro de autenticación JWT
-                .addFilterAfter(jwtValidationFilter, JwtAuthenticationFilter.class); // Añade el filtro de validación JWT después del filtro de autenticación
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jwtValidationFilter, JwtAuthenticationFilter.class);
 
-        return http.build(); // Construye y devuelve la configuración de seguridad
+        return http.build();
     }
 
-
-    // Configura el proveedor de autenticación
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService); // ya es UserDetailsService
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
-    // Configura el AuthenticationManager
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
-            throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // Configura el codificador de contraseñas (BCrypt)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Declara el filtro de autenticación JWT como un bean
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         return new JwtAuthenticationFilter(authenticationManager);
     }
 
-    // Declara el filtro de validación JWT como un bean
     @Bean
     public JwtValidationFilter jwtValidationFilter(AuthenticationManager authenticationManager) {
         return new JwtValidationFilter(authenticationManager);

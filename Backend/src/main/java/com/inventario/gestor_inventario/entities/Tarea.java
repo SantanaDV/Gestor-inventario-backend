@@ -22,6 +22,8 @@ public class Tarea {
     private String estado;
 
 
+
+
     private String empleado_asignado;
     private Date fecha_asignacion,fecha_finalizacion;
 

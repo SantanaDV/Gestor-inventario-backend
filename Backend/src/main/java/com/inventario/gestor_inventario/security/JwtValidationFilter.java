@@ -25,7 +25,7 @@ import static com.inventario.gestor_inventario.security.TokenJwtConfig.*;
 
 @Component
 public class JwtValidationFilter extends BasicAuthenticationFilter {
-    // Constructor que recibe un AuthenticationManager y lo pasa al constructor de la clase padre
+
     public JwtValidationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -35,65 +35,53 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain chain)
             throws IOException, ServletException {
-        // Obtenemos el encabezado de autorización de la solicitud
         String header = request.getHeader(HEADER_AUTHORIZATION);
 
-        // Verificamos si el encabezado es nulo o no comienza con el prefijo del token
         if (header == null || !header.startsWith(PREFIX_TOKEN)) {
             chain.doFilter(request, response);
             return;
         }
-        // Extraemos el token eliminando el prefijo y los espacios en blanco
+
         String token = header.replace(PREFIX_TOKEN, "").trim();
         try {
-            // Parseamos el token JWT y verificamos su firma usando la clave secreta
-            // Usando parserBuilder() de la versión 0.12.6 de JJWT
             Jws<Claims> jwsClaims = Jwts.parser()
                     .setSigningKey(SECRET_KEY)
                     .build()
                     .parseClaimsJws(token);
 
-            // Obtenemos los claims (datos) del token
             Claims claims = jwsClaims.getBody();
-            // Extraemos el nombre de usuario (subject) del token
             String username = claims.getSubject();
-
-            // Extraer la lista de roles desde los claims
             List<String> roles = claims.get("authorities", List.class);
-            String rol = claims.get("rol", String.class); // Extraer el rol del token
+            String rol = claims.get("rol", String.class); // Extraer el rol principal
 
-            // Verificamos si el nombre de usuario o los roles son nulos
             if (username == null || roles == null) {
-                // Si son nulos, devolvemos un error de no autorizado
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.getWriter().write("No autorizado: Token inválido.");
                 return;
             }
 
-            // Convertir roles a a una colección GrantedAuthority
+            // Convertir la lista de roles en autoridades Spring Security
             Collection<GrantedAuthority> authorities = roles.stream()
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());
 
-            // Creamos un objeto de autenticación con el nombre de usuario y los roles
-            // Autenticamos el usuario con los roles obtenidos
+            // Crear el token de autenticación
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(username, null, authorities);
-            auth.setDetails(rol); // Establecer el rol como detalle de la autenticación
+            auth.setDetails(rol); // Guardar el rol en detalles
 
-            // Establecemos la autenticación en el contexto de seguridad
+            // Configurar la autenticación en el contexto de seguridad
             SecurityContextHolder.getContext().setAuthentication(auth);
-            // Continuamos con la cadena de filtros
             chain.doFilter(request, response);
 
         } catch (JwtException e) {
-            // Si ocurre una excepción al validar el token, devolvemos un error de no autorizado
-            Map<String, String> body = Map.of(
-                    "error", e.getMessage(),
-                    "message", "El token JWT no es válido"
-            );
-            response.getWriter().write(new ObjectMapper().writeValueAsString(body));
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType(CONTENT_TYPE);
+            Map<String, String> body = Map.of(
+                    "error", "Token no válido",
+                    "message", e.getMessage()
+            );
+            response.getWriter().write(new ObjectMapper().writeValueAsString(body));
         }
     }
 }

@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class JPAUserDetailsService implements UserDetailsService {
@@ -41,7 +39,7 @@ public class JPAUserDetailsService implements UserDetailsService {
 
         // Convertir el rol del usuario a GrantedAuthority
         Set<GrantedAuthority> authorities = new HashSet<>();
-        String rol = user.getRol(); // Obtener el rol como String
+        String rol = (String) user.getRol(); // Obtener el rol como String
         if (rol != null && !rol.isEmpty()) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + rol.toUpperCase())); // Añadir prefijo "ROLE_"
         }
