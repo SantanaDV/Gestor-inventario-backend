@@ -52,7 +52,7 @@ public class JPAUserDetailsService implements UserDetailsService {
         // Crear y retornar el UserDetails con los datos del usuario
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),         // username
-                user.getContraseña(),    // password (almacenada encriptada)
+                user.getContrasena(),    // password (almacenada encriptada)
                 enabled,                 // enabled
                 true,                    // accountNonExpired
                 true,                    // credentialsNonExpired

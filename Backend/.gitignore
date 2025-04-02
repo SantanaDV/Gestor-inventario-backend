@@ -85,3 +85,7 @@ tailwind.config.js
 *.css.map
 *.js.map
 /.metadata/
+
+
+#Proyecto
+application.properties
