@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -16,5 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowCredentials(true);
+    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/img/**")
+                .addResourceLocations("file:src/main/webapp/resources/img/");
     }
 }

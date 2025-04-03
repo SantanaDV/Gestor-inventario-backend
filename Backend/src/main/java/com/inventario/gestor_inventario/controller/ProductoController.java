@@ -1,12 +1,20 @@
 package com.inventario.gestor_inventario.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inventario.gestor_inventario.entities.Pedido;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @RestController
@@ -30,10 +38,28 @@ public class ProductoController {
         return productoServiceImpl.obtenerProductoConQR(codigo_qr);
     }
 
-    @PostMapping
-    public Producto CrearProducto(@RequestBody ProductoCatDTO producto) {
+    @PostMapping(consumes = "multipart/form-data")
+    public Producto CrearProducto(
+            @RequestPart("producto") String productoJSON,
+            @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
+
+        if (imagen != null && !imagen.isEmpty()) {
+            Path uploadDir = Paths.get("src/main/webapp/resources/img/");
+            Files.createDirectories(uploadDir);
+
+            String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
+            Path path = uploadDir.resolve(filename);
+            Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+            producto.setUrl_img("/resources/img/" + filename);
+        }
+
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
+
 
     @PutMapping
     public Producto ActualizarProducto(@RequestBody ProductoCatDTO producto) {
