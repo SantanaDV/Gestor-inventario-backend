@@ -47,14 +47,14 @@ public class ProductoController {
         ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
 
         if (imagen != null && !imagen.isEmpty()) {
-            Path uploadDir = Paths.get("src/main/webapp/resources/img/");
+            Path uploadDir = Paths.get("src/main/resources/static/uploads/");
             Files.createDirectories(uploadDir);
 
             String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
             Path path = uploadDir.resolve(filename);
             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-            producto.setUrl_img("/resources/img/" + filename);
+            producto.setUrl_img("http://localhost:8080/imagen/" + filename);
         }
 
         return this.productoServiceImpl.CrearActualizarProducto(producto);
