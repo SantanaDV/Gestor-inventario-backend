@@ -31,6 +31,7 @@ public class RegistroController {
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
         Date tiempo = new Date();
         usuario.setFechaAlta(tiempo);
+        usuario.setEstado(1);
         return this.usuarioController.CrearActualizarUsuario(usuario);
     }
 }
