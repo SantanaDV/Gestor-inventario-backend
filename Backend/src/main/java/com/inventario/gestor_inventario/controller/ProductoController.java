@@ -5,6 +5,7 @@ import com.inventario.gestor_inventario.entities.Pedido;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +47,14 @@ public class ProductoController {
         ObjectMapper objectMapper = new ObjectMapper();
         ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
 
+        Dotenv dotenv = Dotenv.configure()
+                .directory("src/main/resources")
+                .filename("variables.env")
+                .load();
+        String urlServer = dotenv.get("URL_SERVER");
+        String port = dotenv.get("PORT_SERVER");
+        String protocol = dotenv.get("SERVER_PROTOCOL");
+
         if (imagen != null && !imagen.isEmpty()) {
             Path uploadDir = Paths.get("src/main/resources/static/uploads/");
             Files.createDirectories(uploadDir);
@@ -54,7 +63,7 @@ public class ProductoController {
             Path path = uploadDir.resolve(filename);
             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-            producto.setUrl_img("http://localhost:8080/imagen/" + filename);
+            producto.setUrl_img(protocol+"://" + urlServer + ":" + port + "/imagen/" + filename);
         }
 
         return this.productoServiceImpl.CrearActualizarProducto(producto);
