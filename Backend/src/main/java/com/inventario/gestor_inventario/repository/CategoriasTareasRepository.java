@@ -5,7 +5,9 @@ import com.inventario.gestor_inventario.entities.CategoriaTarea;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface CategoriasProductoRepository extends JpaRepository<Categoria,Integer> {
+public interface CategoriasTareasRepository extends JpaRepository<CategoriaTarea,Integer> {
 
 }
