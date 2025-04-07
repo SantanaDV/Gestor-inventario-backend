@@ -26,4 +26,6 @@ public interface UsuarioService {
 
     Usuario BuscarUsuario(int id);
 
+    Boolean ExisteUsuario(String email);
+
 }

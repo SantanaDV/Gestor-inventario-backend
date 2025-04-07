@@ -1,0 +1,207 @@
+[1mdiff --git a/Backend/.gitignore b/Backend/.gitignore[m
+[1mindex b3ffc85..eb81c18 100644[m
+[1m--- a/Backend/.gitignore[m
+[1m+++ b/Backend/.gitignore[m
+[36m@@ -85,7 +85,7 @@[m [mtailwind.config.js[m
+ *.css.map[m
+ *.js.map[m
+ /.metadata/[m
+[31m-[m
+[32m+[m[32msrc/main/resources/variables.env[m
+ [m
+ #Proyecto[m
+ application.properties[m
+\ No newline at end of file[m
+[1mdiff --git a/Backend/pom.xml b/Backend/pom.xml[m
+[1mindex b2cbf0c..9616c4c 100644[m
+[1m--- a/Backend/pom.xml[m
+[1m+++ b/Backend/pom.xml[m
+[36m@@ -144,6 +144,12 @@[m
+ 			<version>1.2.5</version>[m
+ 		</dependency>[m
+ [m
+[32m+[m		[32m<dependency>[m
+[32m+[m			[32m<groupId>io.github.cdimascio</groupId>[m
+[32m+[m			[32m<artifactId>dotenv-java</artifactId>[m
+[32m+[m			[32m<version>3.2.0</version>[m
+[32m+[m		[32m</dependency>[m
+[32m+[m
+ 	</dependencies>[m
+ [m
+ 	<build>[m
+[1mdiff --git a/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java b/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java[m
+[1mindex 1f58ed8..c0f6ddf 100644[m
+[1m--- a/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java[m
+[1m+++ b/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java[m
+[36m@@ -1,17 +1,52 @@[m
+ package com.inventario.gestor_inventario;[m
+ [m
+[32m+[m[32mimport io.github.cdimascio.dotenv.Dotenv;[m
+ import org.springframework.boot.SpringApplication;[m
+ import org.springframework.boot.autoconfigure.SpringBootApplication;[m
+ import org.springframework.context.annotation.Bean;[m
+[32m+[m[32mimport org.springframework.core.env.MapPropertySource;[m
+[32m+[m[32mimport org.springframework.core.env.MutablePropertySources;[m
+[32m+[m[32mimport org.springframework.core.env.StandardEnvironment;[m
+ import org.springframework.web.servlet.ViewResolver;[m
+ import org.springframework.web.servlet.view.InternalResourceViewResolver;[m
+ import org.springframework.web.servlet.view.JstlView;[m
+ [m
+[32m+[m[32mimport java.util.HashMap;[m
+[32m+[m[32mimport java.util.Map;[m
+[32m+[m
+ @SpringBootApplication[m
+ public class GestorInventarioApplication {[m
+ [m
+ 	public static void main(String[] args) {[m
+[31m-		 SpringApplication.run(GestorInventarioApplication.class, args);[m
+[32m+[m		[32mDotenv dotenv = Dotenv.configure()[m
+[32m+[m				[32m.directory("src/main/resources")[m
+[32m+[m				[32m.filename("variables.env")[m
+[32m+[m				[32m.load();[m
+[32m+[m
+[32m+[m		[32mString urlServer = dotenv.get("URL_SERVER");[m
+[32m+[m		[32mString bdPort = dotenv.get("BD_PORT");[m
+[32m+[m		[32mString bdName = dotenv.get("BD_NAME");[m
+[32m+[m		[32mString username = dotenv.get("BD_USERNAME");[m
+[32m+[m		[32mString password = dotenv.get("BD_PASSWORD");[m
+[32m+[m		[32mString portServer = dotenv.get("PORT_SERVER");[m
+[32m+[m		[32mString protocol = dotenv.get("SERVER_PROTOCOL");[m
+[32m+[m		[32mSystem.out.println(urlServer+":"+bdPort+"\n"+bdName+username+"::"+password+"_>"+portServer+"||"+protocol);[m
+[32m+[m		[32mString databaseUrl = "jdbc:mysql://" + urlServer + ":" + bdPort + "/" + bdName;[m
+[32m+[m
+[32m+[m		[32mStandardEnvironment environment = new StandardEnvironment();[m
+[32m+[m		[32mMutablePropertySources propertySources = environment.getPropertySources();[m
+[32m+[m		[32mMap<String, Object> dotenvMap = new HashMap<>();[m
+[32m+[m		[32mdotenvMap.put("PORT_SERVER", portServer);[m
+[32m+[m		[32mdotenvMap.put("SPRING_DATASOURCE_URL", databaseUrl);[m
+[32m+[m		[32mdotenvMap.put("SPRING_DATASOURCE_USERNAME", username);[m
+[32m+[m		[32mdotenvMap.put("SPRING_DATASOURCE_PASSWORD", password);[m
+[32m+[m
+[32m+[m		[32mSpringApplication app = new SpringApplication(GestorInventarioApplication.class);[m
+[32m+[m		[32mapp.addInitializers(applicationContext -> {[m
+[32m+[m			[32mStandardEnvironment env = (StandardEnvironment) applicationContext.getEnvironment();[m
+[32m+[m			[32menv.getPropertySources().addFirst(new MapPropertySource("dotenv", dotenvMap));[m
+[32m+[m		[32m});[m
+[32m+[m		[32mapp.run(args);[m
+ 	}[m
+ 	@Bean[m
+ 	public ViewResolver getViewResolver(){[m
+[36m@@ -22,4 +57,5 @@[m [mpublic class GestorInventarioApplication {[m
+ 		resolver.setViewClass(JstlView.class);[m
+ 		return resolver;[m
+ 	}[m
+[32m+[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/Backend/src/main/java/com/inventario/gestor_inventario/controller/ImagenController.java b/Backend/src/main/java/com/inventario/gestor_inventario/controller/ImagenController.java[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4c9db03[m
+[1m--- /dev/null[m
+[1m+++ b/Backend/src/main/java/com/inventario/gestor_inventario/controller/ImagenController.java[m
+[36m@@ -0,0 +1,31 @@[m
+[32m+[m[32mpackage com.inventario.gestor_inventario.controller;[m
+[32m+[m[32mimport org.springframework.core.io.ClassPathResource;[m
+[32m+[m[32mimport org.springframework.core.io.Resource;[m
+[32m+[m[32mimport org.springframework.http.HttpHeaders;[m
+[32m+[m[32mimport org.springframework.http.MediaType;[m
+[32m+[m[32mimport org.springframework.http.ResponseEntity;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.GetMapping;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.PathVariable;[m
+[32m+[m[32mimport org.springframework.web.bind.annotation.RestController;[m
+[32m+[m
+[32m+[m[32mimport java.io.IOException;[m
+[32m+[m
+[32m+[m[32m@RestController[m
+[32m+[m[32mpublic class ImagenController {[m
+[32m+[m
+[32m+[m[32m    @GetMapping("/imagen/{nombreImagen}")[m
+[32m+[m[32m    public ResponseEntity<Resource> obtenerImagen(@PathVariable String nombreImagen) throws IOException {[m
+[32m+[m[32m        // Ruta de la imagen en el directorio 'static/img'[m
+[32m+[m[32m        Resource resource = new ClassPathResource("static/uploads/" + nombreImagen);[m
+[32m+[m
+[32m+[m[32m        if (!resource.exists()) {[m
+[32m+[m[32m            return ResponseEntity.notFound().build();[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        String contentType = "image/jpeg";[m
+[32m+[m
+[32m+[m[32m        return ResponseEntity.ok()[m
+[32m+[m[32m                .header(HttpHeaders.CONTENT_TYPE, contentType)[m
+[32m+[m[32m                .body(resource);[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+[1mdiff --git a/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java b/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java[m
+[1mindex 307d595..fbd7229 100644[m
+[1m--- a/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java[m
+[1m+++ b/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java[m
+[36m@@ -5,6 +5,7 @@[m [mimport com.inventario.gestor_inventario.entities.Pedido;[m
+ import com.inventario.gestor_inventario.entities.Producto;[m
+ import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;[m
+ import com.inventario.gestor_inventario.utilities.ProductoCatDTO;[m
+[32m+[m[32mimport io.github.cdimascio.dotenv.Dotenv;[m
+ import org.springframework.security.access.prepost.PreAuthorize;[m
+ import org.springframework.web.bind.annotation.*;[m
+ import org.springframework.web.multipart.MultipartFile;[m
+[36m@@ -46,15 +47,23 @@[m [mpublic class ProductoController {[m
+         ObjectMapper objectMapper = new ObjectMapper();[m
+         ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);[m
+ [m
+[32m+[m[32m        Dotenv dotenv = Dotenv.configure()[m
+[32m+[m[32m                .directory("src/main/resources")[m
+[32m+[m[32m                .filename("variables.env")[m
+[32m+[m[32m                .load();[m
+[32m+[m[32m        String urlServer = dotenv.get("URL_SERVER");[m
+[32m+[m[32m        String port = dotenv.get("PORT_SERVER");[m
+[32m+[m[32m        String protocol = dotenv.get("SERVER_PROTOCOL");[m
+[32m+[m
+         if (imagen != null && !imagen.isEmpty()) {[m
+[31m-            Path uploadDir = Paths.get("src/main/webapp/resources/img/");[m
+[32m+[m[32m            Path uploadDir = Paths.get("src/main/resources/static/uploads/");[m
+             Files.createDirectories(uploadDir);[m
+ [m
+             String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();[m
+             Path path = uploadDir.resolve(filename);[m
+             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);[m
+ [m
+[31m-            producto.setUrl_img("/resources/img/" + filename);[m
+[32m+[m[32m            producto.setUrl_img(protocol+"://" + urlServer + ":" + port + "/imagen/" + filename);[m
+         }[m
+ [m
+         return this.productoServiceImpl.CrearActualizarProducto(producto);[m
+[1mdiff --git a/Backend/src/main/resources/application.properties b/Backend/src/main/resources/application.properties[m
+[1mindex 9067213..3655348 100644[m
+[1m--- a/Backend/src/main/resources/application.properties[m
+[1m+++ b/Backend/src/main/resources/application.properties[m
+[36m@@ -1,9 +1,9 @@[m
+ spring.application.name=gestor-inventario[m
+[31m-server.port = 8080[m
+[32m+[m[32mserver.port = ${PORT_SERVER:8080}[m
+ [m
+[31m-spring.datasource.url=jdbc:mysql://10.110.4.118:3434/gestion_almacen[m
+[31m-spring.datasource.username=wul4dev[m
+[31m-spring.datasource.password=wul4dev[m
+[32m+[m[32mspring.datasource.url=${SPRING_DATASOURCE_URL}[m
+[32m+[m[32mspring.datasource.username=${SPRING_DATASOURCE_USERNAME}[m
+[32m+[m[32mspring.datasource.password=${SPRING_DATASOURCE_PASSWORD}[m
+ [m
+ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver[m
+ spring.jpa.hibernate.ddl-auto=none[m
+[1mdiff --git a/Backend/src/main/webapp/resources/img/1743679342907_Camiseta_lisa.jpg b/Backend/src/main/resources/static/uploads/1743679342907_Camiseta_lisa.jpg[m
+[1msimilarity index 100%[m
+[1mrename from Backend/src/main/webapp/resources/img/1743679342907_Camiseta_lisa.jpg[m
+[1mrename to Backend/src/main/resources/static/uploads/1743679342907_Camiseta_lisa.jpg[m
+[1mdiff --git a/Backend/src/main/resources/variables.env b/Backend/src/main/resources/variables.env[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d0a3e10[m
+[1m--- /dev/null[m
+[1m+++ b/Backend/src/main/resources/variables.env[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32mSERVER_PROTOCOL=http[m
+[32m+[m[32mPORT_SERVER=8080[m
+[32m+[m[32mURL_SERVER=10.110.4.118[m
+[32m+[m[32mBD_PORT=3434[m
+[32m+[m[32mBD_NAME=gestion_almacen[m
+[32m+[m[32mBD_USERNAME=wul4dev[m
+[32m+[m[32mBD_PASSWORD=wul4dev[m
+\ No newline at end of file[m

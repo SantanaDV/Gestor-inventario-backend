@@ -34,8 +34,15 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findById(id).get();
     }
 
+    @Override
+    public Boolean ExisteUsuario(String email) {
+        return usuarioRepository.existsByEmail(email);
+    }
+
 
     public String obtenerUsuarioPorEmail (String email) {
         return usuarioRepository.findByEmail(email).getEmail();
     }
+
+
 }
