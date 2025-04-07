@@ -89,3 +89,4 @@ src/main/resources/variables.env
 
 #Proyecto
 application.properties
+variables.env
