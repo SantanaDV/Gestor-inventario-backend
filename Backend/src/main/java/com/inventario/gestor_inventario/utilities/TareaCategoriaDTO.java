@@ -16,5 +16,5 @@ public class TareaCategoriaDTO {
     private String estado;
     private String empleado_asignado;
     private Date fecha_asignacion,fecha_finalizacion;
-    private CategoriaTarea categoria;
+    private int id_categoria;
 }

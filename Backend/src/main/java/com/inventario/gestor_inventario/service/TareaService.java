@@ -2,6 +2,8 @@ package com.inventario.gestor_inventario.service;
 
 import com.inventario.gestor_inventario.entities.Pedido;
 import com.inventario.gestor_inventario.entities.Tarea;
+import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
+
 import java.util.List;
 
 public interface TareaService {
@@ -18,7 +20,7 @@ public interface TareaService {
      * @param tarea recibe una tarea
      * @return crear
      */
-    Tarea CrearTarea(Tarea tarea);
+    Tarea CrearTarea(TareaCategoriaDTO tarea);
 
 
     /**

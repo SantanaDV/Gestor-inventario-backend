@@ -3,6 +3,7 @@ package com.inventario.gestor_inventario.controller;
 import com.inventario.gestor_inventario.entities.Tarea;
 import com.inventario.gestor_inventario.repository.TareaRepository;
 import com.inventario.gestor_inventario.service.implementations.TareaServiceImpl;
+import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +36,12 @@ public class TareaController {
         }
     }
     @PostMapping
-    public Tarea CrearTarea(@RequestBody Tarea tarea) {
+    public Tarea CrearTarea(@RequestBody TareaCategoriaDTO tarea) {
         return this.repository.CrearTarea(tarea);
     }
 
     @PutMapping
-    public Tarea ActualizarTarea(@RequestBody Tarea tarea) {
+    public Tarea ActualizarTarea(@RequestBody TareaCategoriaDTO tarea) {
         return this.repository.CrearTarea(tarea);
     }
 
