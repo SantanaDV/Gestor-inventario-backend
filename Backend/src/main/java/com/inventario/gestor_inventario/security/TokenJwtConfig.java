@@ -49,3 +49,4 @@ public class TokenJwtConfig {
 //    // Tipo de contenido (Content-Type) que se utiliza en las respuestas HTTP.
 //    public static final String CONTENT_TYPE = "application/json";
 //}
+
