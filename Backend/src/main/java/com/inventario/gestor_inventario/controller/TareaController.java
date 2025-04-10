@@ -36,6 +36,9 @@ public class TareaController {
     }
     @PostMapping
     public Tarea CrearTarea(@RequestBody Tarea tarea) {
+            if(tarea.getEmpleado_asignado().isBlank()){
+                tarea.setEmpleado_asignado("Sin asignar");
+            }
         return this.repository.CrearTarea(tarea);
     }
 
