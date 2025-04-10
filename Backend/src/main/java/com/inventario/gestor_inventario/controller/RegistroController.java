@@ -37,7 +37,13 @@ public class RegistroController {
             usuario.setEstado(1);
             return this.usuarioController.CrearActualizarUsuario(usuario);
         }
-        return usuario;
+        if(usuario.getRol() == null){
+            usuario.setRol("EMPLEADO");
+        }
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+        Date tiempo = new Date();
+        usuario.setFechaAlta(tiempo);
+        return this.usuarioController.CrearActualizarUsuario(usuario);
     }
 }
 
