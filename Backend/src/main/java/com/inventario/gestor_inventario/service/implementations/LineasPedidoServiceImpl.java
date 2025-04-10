@@ -18,9 +18,9 @@ public class LineasPedidoServiceImpl implements LineasPedidoService {
     @Autowired
     private LineasPedidoRepository lineasPedidoRepository;
     @Autowired
-    private ProductoRepository productoController;
+    private ProductoRepository productoRepository;
     @Autowired
-    private PedidoRepository pedidoController;
+    private PedidoRepository pedidoRepository;
 
     @Override
     public List<LineasPedidoDTO> ListarPedidos() {
