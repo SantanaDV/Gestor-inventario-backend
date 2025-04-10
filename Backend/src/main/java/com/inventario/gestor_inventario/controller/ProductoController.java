@@ -28,15 +28,19 @@ public class ProductoController {
         this.productoServiceImpl = productoServiceImpl;
     }
 
-    @GetMapping
+    @GetMapping("/api/producto")
     public List<Producto> ListarProducto(){
         return this.productoServiceImpl.listarProductos();
     }
 
-    @GetMapping("/obtenerProductoQR/{codigo_qr}")
-    @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-    public Producto obtenerProductoPorQR(@PathVariable String codigo_qr){
-        return productoServiceImpl.obtenerProductoConQR(codigo_qr);
+//    @GetMapping("/obtenerProductoQR/{codigo_qr}")
+//    @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+//    public List<Producto> obtenerProductoConExistencias(){
+//        return productoServiceImpl.listarProductosConStock();
+//    }
+    @GetMapping("/productosConExistencias")
+    public List<Producto> obtenerProductosConExistencias() {
+        return productoServiceImpl.listarProductosConStock();
     }
 
     @PostMapping(consumes = "multipart/form-data")
@@ -68,7 +72,6 @@ public class ProductoController {
 
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
-
 
     @PutMapping
     public Producto ActualizarProducto(@RequestBody ProductoCatDTO producto) {
