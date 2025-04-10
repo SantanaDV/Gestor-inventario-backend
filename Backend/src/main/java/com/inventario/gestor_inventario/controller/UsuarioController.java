@@ -3,7 +3,6 @@ package com.inventario.gestor_inventario.controller;
 import com.inventario.gestor_inventario.entities.Usuario;
 import com.inventario.gestor_inventario.service.implementations.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -14,63 +13,66 @@ import java.util.List;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 
-    private UsuarioServiceImpl usuarioService;
+    private UsuarioServiceImpl usuarioController;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public UsuarioController(UsuarioServiceImpl usuario){
-        this.usuarioService = usuario;
+        this.usuarioController = usuario;
     }
 
 
 
-    // Endpoint protegido para administradores de prueba
+
+    // Endpoint protegido para administradores
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String admin() {
         return "Bienvenido, administrador!";
     }
 
-    // Endpoint protegido para empleados de prueba
+    // Endpoint protegido para empleados (solo empleados, no administradores)
     @GetMapping("/empleado")
-    @PreAuthorize("hasRole('EMPLEADO') and hasRole('ADMIN')")
+    @PreAuthorize("hasRole('EMPLEADO')")
+
+
+
     public String empleado() {
         return "Bienvenido, empleado!";
     }
 
     // Endpoint protegido para usuarios administrador (listar usuarios)
-    @GetMapping("/admin/listarUsuarios")
-    //@PreAuthorize("hasRole('ADMIN')")
+
+    @GetMapping("/listar")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<Usuario> ListarUsuarios() {
-        return usuarioService.ListarUsuarios();
+        return usuarioController.ListarUsuarios();
     }
 
     // Endpoint protegido para administradores (actualizar usuario)
-    @PutMapping ("/admin/actualizarUsuario")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping ("/actualizar")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Usuario ActualizarUsuario(@RequestBody Usuario usuario) {
-        return this.usuarioService.CrearActualizarUsuario(usuario);
+        return this.usuarioController.CrearActualizarUsuario(usuario);
     }
 
     // Endpoint protegido para administradores (eliminar usuario)
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void eliminarUsuario(@PathVariable int id) {
-        this.usuarioService.EliminarUsuario(id);}
+        this.usuarioController.EliminarUsuario(id);}
 
     // Nuevo endpoint para empleados (solo pueden ver su propio perfil)
-    @GetMapping("/empleado/miPerfil")
-    @PreAuthorize("hasRole('EMPLEADO')")
-    public String miPerfil(@RequestParam String email) {
-        return usuarioService.obtenerUsuarioPorEmail(email);
+    @GetMapping("/empleado/miPerfil/{email}")
+    @PreAuthorize("hasRole('ROL_EMPLEADO')")
+    public Usuario miPerfil(@PathVariable String email) {
+        return usuarioController.obtenerUsuarioPorEmail(email);
     }
 
-    @GetMapping("/existe-email")
-    public ResponseEntity<Boolean> existeEmail(@RequestParam String email) {
-        boolean existe = usuarioService.ExisteUsuario(email);
-        return ResponseEntity.ok(existe);
+    @GetMapping("/contarUsuarios")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROL_EMPLEADO')")
+    public Integer contarUsuarios(){
+        return usuarioController.contarUsuarios();
     }
-
-
 }
