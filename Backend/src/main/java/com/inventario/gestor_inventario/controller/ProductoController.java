@@ -38,10 +38,10 @@ public class ProductoController {
 //    public List<Producto> obtenerProductoConExistencias(){
 //        return productoServiceImpl.listarProductosConStock();
 //    }
-    @GetMapping("/productosConExistencias")
-    public List<Producto> obtenerProductosConExistencias() {
-        return productoServiceImpl.listarProductosConStock();
-    }
+//    @GetMapping("/productosConExistencias")
+//    public List<Producto> obtenerProductosConExistencias() {
+//        return productoServiceImpl.listarProductosConStock();
+//    }
 
     @PostMapping(consumes = "multipart/form-data")
     public Producto CrearProducto(
@@ -67,7 +67,7 @@ public class ProductoController {
             Path path = uploadDir.resolve(filename);
             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-            producto.setUrl_img(protocol+"://" + urlServer + ":" + port + "/imagen/" + filename);
+//            producto.setUrl_img(protocol+"://" + urlServer + ":" + port + "/imagen/" + filename);
         }
 
         return this.productoServiceImpl.CrearActualizarProducto(producto);
