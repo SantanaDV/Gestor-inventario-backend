@@ -21,6 +21,10 @@ public class Producto {
 
         private String nombre;
         private int cantidad;
+        private int pedido;
+        private int id;
+
+        private int id_pedido;
 
         @Column(name = "estado", columnDefinition = "ENUM('activo', 'desactivado')")
         private String estado;
@@ -39,4 +43,16 @@ public class Producto {
         @ManyToOne
         @JoinColumn(name = "id_categoria", nullable = false)
         private Categoria categoria;
+
+        public int getCantidad() {
+            return 0;
+        }
+
+        public int getId_producto() {
+                return id_producto;
+        }
+
+        public void setId_producto(int id_producto) {
+                this.id_producto = id_producto;
+        }
 }
