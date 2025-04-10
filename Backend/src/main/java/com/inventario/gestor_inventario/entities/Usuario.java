@@ -31,6 +31,11 @@ public class Usuario {
     private Date fechaAlta, fecha_baja;
     @Column(name = "rol", columnDefinition = "ENUM('admin', 'empleado')")
     private String rol;
+
+
+    @Column(name = "rol", columnDefinition = "ENUM('admin', 'empleado')")
+    // Método para obtener los roles en el formato que Spring Security espera
+
     @Transient
     @JsonIgnore
     public Optional<Object> getRoles() {
