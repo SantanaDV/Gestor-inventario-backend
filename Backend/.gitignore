@@ -88,5 +88,5 @@ tailwind.config.js
 src/main/resources/variables.env
 
 #Proyecto
-application.properties
-variables.env
+#application.properties
+#variables.env
