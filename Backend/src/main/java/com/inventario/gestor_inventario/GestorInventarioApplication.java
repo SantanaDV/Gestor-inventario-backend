@@ -30,7 +30,6 @@ public class GestorInventarioApplication {
 		String password = dotenv.get("BD_PASSWORD");
 		String portServer = dotenv.get("PORT_SERVER");
 		String protocol = dotenv.get("SERVER_PROTOCOL");
-		System.out.println(urlServer+":"+bdPort+"\n"+bdName+username+"::"+password+"_>"+portServer+"||"+protocol);
 		String databaseUrl = "jdbc:mysql://" + urlServer + ":" + bdPort + "/" + bdName;
 
 		StandardEnvironment environment = new StandardEnvironment();
