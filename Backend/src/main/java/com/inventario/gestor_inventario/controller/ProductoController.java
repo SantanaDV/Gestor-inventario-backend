@@ -65,7 +65,6 @@ public class ProductoController {
 
             producto.setUrl_img(filename);
         }
-
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
 
