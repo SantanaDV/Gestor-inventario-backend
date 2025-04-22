@@ -24,16 +24,8 @@ public class TareaController {
     }
 
     @GetMapping
-    public List<Tarea> ListarTarea() {
-        logger.info("Iniciando método ListarTarea()");
-        try {
-            List<Tarea> tareas = this.repository.ListarTarea();
-            logger.info("Se obtuvieron {} tareas", tareas.size());
-            return tareas;
-        } catch (Exception e) {
-            logger.error("Error al listar tareas: {}", e.getMessage(), e);
-            throw e; // Puedes personalizar el manejo si usas un handler global
-        }
+    public List<TareaCategoriaDTO> ListarTarea() {
+       return this.repository.ListarTarea();
     }
     @PostMapping
     public Tarea CrearTarea(@RequestBody TareaCategoriaDTO tarea) {

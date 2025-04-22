@@ -63,9 +63,8 @@ public class ProductoController {
             Path path = uploadDir.resolve(filename);
             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
-            producto.setUrl_img(protocol+"://" + urlServer + ":" + port + "/imagen/" + filename);
+            producto.setUrl_img(filename);
         }
-
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
 
