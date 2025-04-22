@@ -1,16 +1,20 @@
 package com.inventario.gestor_inventario.service.implementations;
 
 import com.inventario.gestor_inventario.entities.CategoriaTarea;
+import com.inventario.gestor_inventario.entities.Notificacion;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.entities.Tarea;
 import com.inventario.gestor_inventario.repository.CategoriasTareasRepository;
 import com.inventario.gestor_inventario.repository.TareaRepository;
 import com.inventario.gestor_inventario.service.TareaService;
+import com.inventario.gestor_inventario.utilities.NotificacionesDTO;
 import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TareaServiceImpl implements TareaService {
@@ -20,9 +24,22 @@ public class TareaServiceImpl implements TareaService {
     private CategoriasTareasRepository categoriatarea;
 
     @Override
-    public List<Tarea> ListarTarea() {
-        return tareaRepository.findAll();
+    public List<TareaCategoriaDTO> ListarTarea() {
+        List<Tarea> tareas = tareaRepository.findAll();
+        List<TareaCategoriaDTO> tareasDTO = tareas.stream()
+                .map(n -> new TareaCategoriaDTO(
+                        n.getId(),
+                        n.getDescripcion(),
+                        n.getEstado(),
+                        n.getEmpleado_asignado(),
+                        n.getFecha_asignacion(),
+                        n.getFecha_finalizacion(),
+                        n.getCategoria().getId()
+                ))
+                .collect(Collectors.toList());
+        return tareasDTO;
     }
+
 
 
     @Override

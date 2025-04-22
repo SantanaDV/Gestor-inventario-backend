@@ -11,7 +11,7 @@ public interface TareaService {
      * Lista de tareas
      * @return List<Tarea>
      */
-    List<Tarea> ListarTarea();
+    List<TareaCategoriaDTO> ListarTarea();
 
 
 
