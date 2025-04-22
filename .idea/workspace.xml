@@ -1,38 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9d4a5638-5f05-40f6-bbab-629521db471f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/GestorInventarioApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/PedidoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/RegistroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/RegistroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/TareaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/TareaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Tarea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/repository/PedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/repository/PedidoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/JwtValidationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/JwtValidationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/TokenJwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/security/TokenJwtConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/JPAUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/JPAUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/PedidoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/PedidoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/LineasPedidoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/LineasPedidoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/PedidoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/PedidoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/UsuarioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/UsuarioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/movimientos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/movimientos.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/productos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/productos.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/tareas.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/webapp/WEB-INF/jsp/tareas.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,9 +22,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2vZuQtGIbe4sNWl6sTqdV8XQB2A" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,12 +34,24 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Monica-Blanco",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Dell/Downloads/ob-spring/Gestor_inventario/Gestor-inventario-backend/Backend"
+    "last_opened_file_path": "C:/Users/Lenovo ThinkPad/Desktop/2 DAM/Practicas/Gestor_inventario/Gestor-inventario-backend/Backend",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Lenovo ThinkPad\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9d4a5638-5f05-40f6-bbab-629521db471f" name="Changes" comment="" />
