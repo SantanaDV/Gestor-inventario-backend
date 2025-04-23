@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -72,6 +73,7 @@ public class UsuarioController {
         return ResponseEntity.ok(existe);
     }
 
+    // Nuevo endpoint para sacar el nombre del usuario
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
     public ResponseEntity<Usuario> obtenerPerfil(@RequestParam String email) {
@@ -82,4 +84,33 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Nuevo endpoint para modificar solo el nombre del usuario
+    @PutMapping("/modificar")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
+    public ResponseEntity<Usuario> modificarNombreUsuario(
+            @RequestParam String email, @RequestBody Map<String, String> requestBody) {
+
+        String nuevoNombre = requestBody.get("nombre");
+
+        if (nuevoNombre == null || nuevoNombre.isEmpty()) {
+            return ResponseEntity.badRequest().body(null); // Si no hay "nombre", respondemos con un error 400
+        }
+
+        // Validamos si el usuario existe antes de intentar actualizar su nombre
+        Usuario usuarioExistente = usuarioService.buscarUsuarioPorEmail(email);
+        if (usuarioExistente == null) {
+            return ResponseEntity.notFound().build(); // Si no se encuentra, retornamos un error 404
+        }
+
+        // Actualizamos solo el nombre del usuario
+        usuarioExistente.setNombre(nuevoNombre);
+
+        // Solo actualizamos, no creamos un nuevo usuario
+        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuarioExistente);
+
+        // Retornamos el usuario actualizado
+        return ResponseEntity.ok(usuarioActualizado);
+    }
+
 }

@@ -27,6 +27,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario actualizarUsuario(Usuario usuarioExistente) {
+        // Aquí realizamos la actualización de los campos necesarios
+        return usuarioRepository.save(usuarioExistente);
+    }
+
+    @Override
     public void EliminarUsuario(int id) {usuarioRepository.deleteById(id);}
 
     @Override

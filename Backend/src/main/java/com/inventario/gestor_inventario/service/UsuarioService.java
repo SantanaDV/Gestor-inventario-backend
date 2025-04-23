@@ -18,6 +18,8 @@ public interface UsuarioService {
      * @return retorna el usuario que quermos ver
      */
     Usuario CrearActualizarUsuario(Usuario usuario);
+
+    Usuario actualizarUsuario(Usuario usuario);
     /**
      * Se encarga de eliminar un uusuario recibiendo los datos
      * @Param recibe un usuario para su eliminacion
