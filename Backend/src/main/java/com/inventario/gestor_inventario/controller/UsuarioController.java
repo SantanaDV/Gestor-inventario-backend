@@ -72,5 +72,14 @@ public class UsuarioController {
         return ResponseEntity.ok(existe);
     }
 
-
+    @GetMapping("/perfil")
+    @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
+    public ResponseEntity<Usuario> obtenerPerfil(@RequestParam String email) {
+        Usuario usuario = usuarioService.buscarUsuarioPorEmail(email);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
