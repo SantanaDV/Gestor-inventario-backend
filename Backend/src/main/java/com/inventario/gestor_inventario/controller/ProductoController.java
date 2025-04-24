@@ -76,9 +76,10 @@ public class ProductoController {
 
     @DeleteMapping("/{id}")
     public void eliminarProducto(@PathVariable int id) {
-        this.eliminarProducto(id);
+        Producto producto = productoServiceImpl.listarProductos().stream()
+                .filter(p -> p.getId_producto() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+        productoServiceImpl.EliminarProducto(producto);
     }
-
-
-
 }
