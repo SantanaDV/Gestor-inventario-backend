@@ -1,9 +1,7 @@
 package com.inventario.gestor_inventario.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.inventario.gestor_inventario.entities.Pedido;
 import com.inventario.gestor_inventario.entities.Producto;
-import com.inventario.gestor_inventario.entities.Usuario;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -29,15 +27,15 @@ public class ProductoController {
         this.productoServiceImpl = productoServiceImpl;
     }
 
-    @GetMapping("/producto/listar")
-    public List<Producto> listarProductos(){
-        return productoServiceImpl.listarProductos();
+    @GetMapping("/listar")
+    public List<Producto> listaProductos(){
+        return productoServiceImpl.listaProductos();
     }
 
-    @GetMapping("/producto/conExistencias")
+    @GetMapping("/conExistencias")
     public List<Producto> listarConExistencias(){return  productoServiceImpl.listarConExistencias();}
 
-    @GetMapping("/producto/conFaltantes")
+    @GetMapping("/conFaltantes")
     public List<Producto>listarConFaltantes(){ return  productoServiceImpl.listarConFaltantes();}
 
 
