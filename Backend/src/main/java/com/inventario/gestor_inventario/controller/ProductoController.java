@@ -27,7 +27,7 @@ public class ProductoController {
         this.productoServiceImpl = productoServiceImpl;
     }
 
-    @GetMapping("/listar")
+    @GetMapping
     public List<Producto> listaProductos(){
         return productoServiceImpl.listaProductos();
     }
