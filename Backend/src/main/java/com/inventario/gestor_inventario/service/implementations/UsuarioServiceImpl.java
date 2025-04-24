@@ -20,6 +20,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public List<Usuario> ListarUsuariosActivos(){ return usuarioRepository.findAll(); }
+
 
     @Override
     public Usuario CrearActualizarUsuario(Usuario usuario) {

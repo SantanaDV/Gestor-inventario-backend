@@ -34,7 +34,7 @@ public class Usuario {
     @Transient
     @JsonIgnore
     public Optional<Object> getRoles() {
-        return getRoles();
+        return Optional.empty();
     }
 
 

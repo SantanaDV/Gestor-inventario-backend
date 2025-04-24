@@ -15,13 +15,13 @@ import java.util.Map;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 
-    private UsuarioServiceImpl usuarioService;
+    private UsuarioServiceImpl usuarioServiceImpl;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public UsuarioController(UsuarioServiceImpl usuario){
-        this.usuarioService = usuario;
+        this.usuarioServiceImpl = usuario;
     }
 
 
@@ -44,32 +44,32 @@ public class UsuarioController {
     @GetMapping("/admin/listarUsuarios")
     //@PreAuthorize("hasRole('ADMIN')")
     public List<Usuario> ListarUsuarios() {
-        return usuarioService.ListarUsuarios();
+        return usuarioServiceImpl.ListarUsuarios();
     }
 
     // Endpoint protegido para administradores (actualizar usuario)
     @PutMapping ("/admin/actualizarUsuario")
     @PreAuthorize("hasRole('ADMIN')")
     public Usuario ActualizarUsuario(@RequestBody Usuario usuario) {
-        return this.usuarioService.CrearActualizarUsuario(usuario);
+        return this.usuarioServiceImpl.CrearActualizarUsuario(usuario);
     }
 
     // Endpoint protegido para administradores (eliminar usuario)
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public void eliminarUsuario(@PathVariable int id) {
-        this.usuarioService.EliminarUsuario(id);}
+        this.usuarioServiceImpl.EliminarUsuario(id);}
 
     // Nuevo endpoint para empleados (solo pueden ver su propio perfil)
     @GetMapping("/empleado/miPerfil")
     @PreAuthorize("hasRole('EMPLEADO')")
     public String miPerfil(@RequestParam String email) {
-        return usuarioService.obtenerUsuarioPorEmail(email);
+        return usuarioServiceImpl.obtenerUsuarioPorEmail(email);
     }
 
     @GetMapping("/existe-email")
     public ResponseEntity<Boolean> existeEmail(@RequestParam String email) {
-        boolean existe = usuarioService.ExisteUsuario(email);
+        boolean existe = usuarioServiceImpl.ExisteUsuario(email);
         return ResponseEntity.ok(existe);
     }
 
@@ -77,7 +77,7 @@ public class UsuarioController {
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
     public ResponseEntity<Usuario> obtenerPerfil(@RequestParam String email) {
-        Usuario usuario = usuarioService.buscarUsuarioPorEmail(email);
+        Usuario usuario = usuarioServiceImpl.buscarUsuarioPorEmail(email);
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
         } else {
@@ -98,7 +98,7 @@ public class UsuarioController {
         }
 
         // Validamos si el usuario existe antes de intentar actualizar su nombre
-        Usuario usuarioExistente = usuarioService.buscarUsuarioPorEmail(email);
+        Usuario usuarioExistente = usuarioServiceImpl.buscarUsuarioPorEmail(email);
         if (usuarioExistente == null) {
             return ResponseEntity.notFound().build(); // Si no se encuentra, retornamos un error 404
         }
@@ -107,10 +107,13 @@ public class UsuarioController {
         usuarioExistente.setNombre(nuevoNombre);
 
         // Solo actualizamos, no creamos un nuevo usuario
-        Usuario usuarioActualizado = usuarioService.actualizarUsuario(usuarioExistente);
+        Usuario usuarioActualizado = usuarioServiceImpl.actualizarUsuario(usuarioExistente);
 
         // Retornamos el usuario actualizado
         return ResponseEntity.ok(usuarioActualizado);
     }
+    @GetMapping("/usuario/usuariosActivos")
+    public List<Usuario>listaTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
+
 
 }
