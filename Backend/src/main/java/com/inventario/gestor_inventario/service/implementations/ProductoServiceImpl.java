@@ -26,6 +26,12 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> listarProductos() {
         return productoRepository.findAll();
     }
+    public List<Producto> listarConExistencias(){
+        return productoRepository.findAll();
+    }
+    public List<Producto>listarConFaltantes(){
+        return productoRepository.findAll();
+    }
 
     @Override
     public Producto CrearActualizarProducto(ProductoCatDTO producto) {
