@@ -14,7 +14,7 @@ public interface ProductoService {
      * Lista de productos
      * @return List<Producto> retorna una lista de productos
      */
-    List<Producto> listarProductos();
+    List<Producto> listaProductos();
 
     /**
      * Creo un producto

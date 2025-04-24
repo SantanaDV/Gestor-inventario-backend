@@ -2,12 +2,7 @@ package com.inventario.gestor_inventario.controller.web;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
-import jakarta.persistence.ColumnResult;
-import jakarta.persistence.ConstructorResult;
-import jakarta.persistence.Entity;
-import jakarta.persistence.SqlResultSetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +31,7 @@ public class ProductoWebController {
         model.addAttribute("totalStock", totalStock);
         model.addAttribute("stockBajo", stockBajo);
         model.addAttribute("stockCritico", stockCritico);
-        model.addAttribute("listarProductos", productoService.listarProductos());
+        model.addAttribute("listarProductos", productoService.listaProductos());
 
         return "productos";
     }

@@ -112,8 +112,9 @@ public class UsuarioController {
         // Retornamos el usuario actualizado
         return ResponseEntity.ok(usuarioActualizado);
     }
-    @GetMapping("/usuario/usuariosActivos")
-    public List<Usuario>listaTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
+    @GetMapping("/usuariosActivos")
+    public List<Usuario>listarTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
 
 
 }
+
