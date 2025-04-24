@@ -83,7 +83,7 @@ public class ProductoController {
 
     @DeleteMapping("/{id}")
     public void eliminarProducto(@PathVariable int id) {
-        Producto producto = productoServiceImpl.listarProductos().stream()
+        Producto producto = productoServiceImpl.listaProductos().stream()
                 .filter(p -> p.getId_producto() == id)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
