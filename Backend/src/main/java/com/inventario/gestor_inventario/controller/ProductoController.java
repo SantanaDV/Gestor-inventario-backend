@@ -76,10 +76,32 @@ public class ProductoController {
     }
 
 
-    @PutMapping
-    public Producto ActualizarProducto(@RequestBody ProductoCatDTO producto) {
+    @PutMapping(consumes = "multipart/form-data")
+    public Producto ActualizarProducto(
+            @RequestPart("producto") String productoJSON,
+            @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
+
+        // Verificamos si la imagen es nula o vacía
+        if (imagen != null && !imagen.isEmpty()) {
+            // Si se pasa una imagen nueva, la actualizamos
+            Path uploadDir = Paths.get("src/main/resources/static/uploads/");
+            Files.createDirectories(uploadDir);
+
+            String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
+            Path path = uploadDir.resolve(filename);
+            Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+            // Actualizamos la URL de la imagen
+            producto.setUrl_img(filename);
+        }
+        // Si no se pasa una imagen, se deja la imagen original que ya tenía el producto
+
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
+
 
     @DeleteMapping("/{id}")
     public void eliminarProducto(@PathVariable int id) {
