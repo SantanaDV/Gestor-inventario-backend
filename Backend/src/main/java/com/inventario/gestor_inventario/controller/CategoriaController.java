@@ -31,6 +31,11 @@ public class CategoriaController {
         return categoriaServiceImpl.crearActualizarCategorias(categoria);
     }
 
+    @PutMapping
+    public Categoria actualizarCategorias(@RequestBody Categoria categoria) {
+        return categoriaServiceImpl.crearActualizarCategorias(categoria);
+    }
+
     @DeleteMapping("/{id}")
     public void DeleteCategoria(@PathVariable  int id) {
         this.categoriaServiceImpl.EliminarCategoria(id);
