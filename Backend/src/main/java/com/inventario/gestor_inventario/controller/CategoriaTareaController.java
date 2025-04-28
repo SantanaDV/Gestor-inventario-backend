@@ -28,6 +28,11 @@ public class CategoriaTareaController {
         return categoriaServiceImpl.crearActualizarCategorias(categoria);
     }
 
+    @PutMapping
+    public CategoriaTarea actualizarCategorias(@RequestBody CategoriaTarea categoria) {
+        return categoriaServiceImpl.crearActualizarCategorias(categoria);
+    }
+
     @DeleteMapping("/{id}")
     public void DeleteCategoria(@PathVariable  int id) {
         this.categoriaServiceImpl.EliminarCategoria(id);
