@@ -15,6 +15,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -61,6 +65,10 @@ public class ProductoController {
 
         ObjectMapper objectMapper = new ObjectMapper();
         ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
+        if(producto.getFecha_creacion() == null){
+            producto.setFecha_creacion(new Timestamp(System.currentTimeMillis()));
+
+        }
 
         Dotenv dotenv = Dotenv.configure()
                 .directory("src/main/resources")
