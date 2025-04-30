@@ -63,8 +63,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     List<ProductoMesDTO> listarProductosMes();
 
 
-
+    @Query(value = "SELECT SUM(p.cantidad) FROM Producto p Where p.estado = 'cantidad' ")
+    Integer listarProductoscontados();
 
 
 
 }
+

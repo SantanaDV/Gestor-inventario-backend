@@ -32,8 +32,16 @@ public class ProductoController {
         return productoServiceImpl.listaProductos();
     }
 
+    @GetMapping ("/productosContados")
+    public int listarProductosContados() {
+        return productoServiceImpl.listarproductosContados();
+    }
+
+
+
     @GetMapping("/conExistencias")
-    public List<Producto> listarConExistencias(){return  productoServiceImpl.listarConExistencias();}
+    public List<Producto> listarConExistencias(){
+        return  productoServiceImpl.listarConExistencias();}
 
     @GetMapping("/conFaltantes")
     public List<Producto>listarConFaltantes(){ return  productoServiceImpl.listarConFaltantes();}
