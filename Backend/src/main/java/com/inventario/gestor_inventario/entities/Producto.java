@@ -36,7 +36,7 @@ public class Producto {
         @Column(name = "nfc_id", unique = true)
         private String nfc_id;
 
-        @Column(name = "posicion_product", unique = true)
+        @Column(name = "posicion_product")
         private String posicion;
 
         @ManyToOne
