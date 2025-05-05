@@ -7,6 +7,7 @@ import com.inventario.gestor_inventario.service.implementations.AlmacenServiceIm
 import com.inventario.gestor_inventario.service.implementations.CategoriasServiceImpl;
 import com.inventario.gestor_inventario.service.implementations.EstanteriaServiceImpl;
 import com.inventario.gestor_inventario.service.implementations.LineasPedidoServiceImpl;
+import com.inventario.gestor_inventario.utilities.EstanteriaAlmDTO;
 import com.inventario.gestor_inventario.utilities.LineasPedidoDTO;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ public class EstanteriaController {
     }
 
     @PostMapping
-    public Estanteria crearActualizarAlmacen(@RequestBody Estanteria estanteria) {
+    public Estanteria crearActualizarAlmacen(@RequestBody EstanteriaAlmDTO estanteria) {
         return estanteriaServiceImp.CrearActualizarEstanteria(estanteria);
     }
 
     @PutMapping
-    public Estanteria actualizarAlmacen(@RequestBody Estanteria estanteria) {
+    public Estanteria actualizarAlmacen(@RequestBody EstanteriaAlmDTO estanteria) {
         return estanteriaServiceImp.CrearActualizarEstanteria(estanteria);
     }
 

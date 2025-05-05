@@ -27,7 +27,7 @@ public interface AlmacenService {
 
     /**
      * Elimino productos
-     * @param almacen toma un producto como parametro de entrada
+     * @param id_almacen toma un producto como parametro de entrada
      */
     void EliminarAlmacen(int id_almacen);
 }
