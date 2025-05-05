@@ -36,7 +36,15 @@ public class Producto {
         @Column(name = "nfc_id", unique = true)
         private String nfc_id;
 
+        @Column(name = "posicion_product")
+        private String posicion;
+
         @ManyToOne
         @JoinColumn(name = "id_categoria", nullable = false)
         private Categoria categoria;
+
+        @ManyToOne
+        @JoinColumn(name = "id_estanteria", nullable = false)
+        private Estanteria estanteria;
+
 }
