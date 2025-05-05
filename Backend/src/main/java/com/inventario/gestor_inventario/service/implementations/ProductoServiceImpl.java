@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.service.implementations;
 
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.repository.CategoriasProductoRepository;
+import com.inventario.gestor_inventario.repository.EstanteriaRepository;
 import com.inventario.gestor_inventario.repository.ProductoRepository;
 import com.inventario.gestor_inventario.service.ProductoService;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
@@ -20,6 +21,8 @@ public class ProductoServiceImpl implements ProductoService {
     private ProductoRepository productoRepository;
     @Autowired
     private CategoriasProductoRepository categoriasProductoRepository;
+    @Autowired
+    private EstanteriaRepository estanteriaRepository;
 
 
     @Override
@@ -50,6 +53,7 @@ public class ProductoServiceImpl implements ProductoService {
         p.setFecha_creacion(producto.getFecha_creacion());
         p.setUrl_img(producto.getUrl_img());
         p.setCodigoQr(producto.getCodigoQr());
+        p.setEstanteria(estanteriaRepository.findById(producto.getId_estanteria()).orElse(null));
         return productoRepository.save(p);
     }
 
