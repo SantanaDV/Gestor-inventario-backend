@@ -36,6 +36,10 @@ public class EstanteriaServiceImpl implements EstanteriaService {
         es.setAlmacen(almacenRepository.findById(estanteria.getId_almacen()).orElse(null));
         return estanteriaRepository.save(es);
     }
+    @Override
+    public List<Estanteria> getEstanteriasByAlmacenId(int idAlmacen) {
+        return estanteriaRepository.findByAlmacenIdAlmacen(idAlmacen);
+    }
 
     @Override
     public void EliminarEstanteria(int estanteria) {

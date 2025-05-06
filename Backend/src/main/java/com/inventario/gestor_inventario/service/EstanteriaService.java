@@ -27,4 +27,7 @@ public interface EstanteriaService {
      * @param id_estanteria toma un producto como parametro de entrada
      */
     void EliminarEstanteria(int id_estanteria);
+
+
+    List<Estanteria> getEstanteriasByAlmacenId(int idAlmacen);
 }
