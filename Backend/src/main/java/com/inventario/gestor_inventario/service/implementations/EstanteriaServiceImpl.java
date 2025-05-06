@@ -32,6 +32,7 @@ public class EstanteriaServiceImpl implements EstanteriaService {
         Estanteria es = new Estanteria();
         es.setId_estanteria(estanteria.getId_estanteria());
         es.setPosicion(estanteria.getPosicion());
+        es.setOrientacion(estanteria.getOrientacion());
         es.setAlmacen(almacenRepository.findById(estanteria.getId_almacen()).orElse(null));
         return estanteriaRepository.save(es);
     }

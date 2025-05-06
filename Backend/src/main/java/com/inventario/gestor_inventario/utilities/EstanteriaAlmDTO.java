@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EstanteriaAlmDTO {
     int id_estanteria,id_almacen;
-    String posicion;
+    String posicion,orientacion;
 }

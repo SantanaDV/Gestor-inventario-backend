@@ -24,5 +24,6 @@ public class Estanteria {
     @ManyToOne
     @JoinColumn(name = "id_almacen", nullable = false)
     private Almacen almacen;
-    
+
+    private String orientacion;
 }
