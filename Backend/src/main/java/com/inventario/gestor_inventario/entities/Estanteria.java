@@ -1,5 +1,6 @@
 package com.inventario.gestor_inventario.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +24,10 @@ public class Estanteria {
 
     @ManyToOne
     @JoinColumn(name = "id_almacen", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)  // Para eliminar las estanterías cuando se elimina el almacén
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference
     private Almacen almacen;
+
 
     @Column(name = "orientacion", columnDefinition = "ENUM('horizontal', 'vertical')")
     private String orientacion;

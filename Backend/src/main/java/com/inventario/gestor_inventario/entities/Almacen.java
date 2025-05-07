@@ -1,5 +1,6 @@
 package com.inventario.gestor_inventario.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class Almacen {
     @Column(name = "ubicacion")
     private String ubicacion;
 
-    // Relación con estanterías con eliminación en cascada
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Estanteria> estanterias;
 }
