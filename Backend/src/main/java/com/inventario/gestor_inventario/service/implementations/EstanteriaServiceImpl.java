@@ -21,6 +21,8 @@ public class EstanteriaServiceImpl implements EstanteriaService {
     private EstanteriaRepository estanteriaRepository;
     @Autowired
     private AlmacenRepository almacenRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @Override
     public List<Estanteria> listarEstanteria() {
@@ -44,5 +46,11 @@ public class EstanteriaServiceImpl implements EstanteriaService {
     @Override
     public void EliminarEstanteria(int estanteria) {
         estanteriaRepository.deleteById(estanteria);
+    }
+
+    @Override
+    public void eliminarEstanteria(int idEstanteria) {
+        productoRepository.desasociarProductosDeEstanteria(idEstanteria);
+        estanteriaRepository.deleteById(idEstanteria);
     }
 }

@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "estanteria")
@@ -23,8 +23,10 @@ public class Estanteria {
 
     @ManyToOne
     @JoinColumn(name = "id_almacen", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)  // Para eliminar las estanterías cuando se elimina el almacén
     private Almacen almacen;
 
     @Column(name = "orientacion", columnDefinition = "ENUM('horizontal', 'vertical')")
     private String orientacion;
+
 }
