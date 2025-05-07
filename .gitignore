@@ -6,3 +6,4 @@ daemon/
 native/
 wrapper/
 *.lock
+Backend/src/main/resources/application.properties
