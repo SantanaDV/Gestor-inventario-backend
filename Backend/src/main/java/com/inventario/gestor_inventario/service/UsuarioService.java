@@ -12,6 +12,8 @@ public interface UsuarioService {
      */
     List<Usuario> ListarUsuarios();
 
+    Integer listarUsuariosActivos();
+
     /**
      * Se encarga de Listar un usuario en concreto
      * @Param recibe un usuario para su listado
