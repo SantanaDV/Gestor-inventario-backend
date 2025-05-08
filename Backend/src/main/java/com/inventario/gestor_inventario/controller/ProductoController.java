@@ -35,7 +35,7 @@ public class ProductoController {
     public List<Producto> listaProductos(){
         return productoServiceImpl.listaProductos();
     }
-    
+
 
     @GetMapping ("/productosContados")
     public Integer totalProductosContados(){
@@ -52,8 +52,13 @@ public class ProductoController {
     public Integer listarConFaltantes(){
         return  productoServiceImpl.listarConFaltantes();}
 
-
-
+    @GetMapping("/{id}")
+    public Producto obtenerProductoPorId(@PathVariable int id) {
+        return productoServiceImpl.listaProductos().stream()
+                .filter(p -> p.getId_producto() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+    }
 
     @GetMapping("/obtenerProductoQR/{codigo_qr}")
     @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
