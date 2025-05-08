@@ -113,7 +113,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
     @GetMapping("/usuariosActivos")
-    public List<Usuario>listarTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
+    public Integer listarUsuariosActivos() {
+        return usuarioServiceImpl.listarUsuariosActivos();
+    }
 
 
 }
