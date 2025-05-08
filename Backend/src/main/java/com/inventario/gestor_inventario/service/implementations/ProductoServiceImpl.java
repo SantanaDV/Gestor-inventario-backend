@@ -53,6 +53,7 @@ public class ProductoServiceImpl implements ProductoService {
         p.setFecha_creacion(producto.getFecha_creacion());
         p.setUrl_img(producto.getUrl_img());
         p.setCodigoQr(producto.getCodigoQr());
+        p.setBalda(producto.getBalda());
         p.setEstanteria(estanteriaRepository.findById(producto.getId_estanteria()).orElse(null));
         return productoRepository.save(p);
     }

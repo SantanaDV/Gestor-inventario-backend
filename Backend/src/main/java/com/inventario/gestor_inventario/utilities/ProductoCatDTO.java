@@ -30,4 +30,5 @@ public class ProductoCatDTO {
 
     private String nfc_id;
     private int id_estanteria;
+    private Integer balda;
 }

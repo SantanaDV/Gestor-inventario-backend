@@ -39,6 +39,9 @@ public class Producto {
         @Column(name = "posicion_product")
         private String posicion;
 
+        @Column(name = "balda_producto", nullable = true)
+        private Integer balda;
+
         @ManyToOne
         @JoinColumn(name = "id_categoria", nullable = false)
         private Categoria categoria;
@@ -46,5 +49,7 @@ public class Producto {
         @ManyToOne
         @JoinColumn(name = "id_estanteria", nullable = false)
         private Estanteria estanteria;
+
+
 
 }
