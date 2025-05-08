@@ -30,6 +30,11 @@ public class EstanteriaController {
         return estanteriaServiceImp.listarEstanteria();
     }
 
+    @GetMapping("/{idAlmacen}")
+    public List<Estanteria> getEstanteriasByAlmacen(@PathVariable int idAlmacen) {
+        return estanteriaServiceImp.getEstanteriasByAlmacenId(idAlmacen);
+    }
+
     @PostMapping
     public Estanteria crearActualizarAlmacen(@RequestBody EstanteriaAlmDTO estanteria) {
         return estanteriaServiceImp.CrearActualizarEstanteria(estanteria);

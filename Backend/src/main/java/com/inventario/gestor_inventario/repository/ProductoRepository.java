@@ -1,12 +1,13 @@
 package com.inventario.gestor_inventario.repository;
 
 import com.inventario.gestor_inventario.entities.Producto;
-import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import com.inventario.gestor_inventario.utilities.ProductoMesDTO;
 import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -63,10 +64,22 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     List<ProductoMesDTO> listarProductosMes();
 
 
-    @Query(value = "SELECT SUM(p.cantidad) FROM Producto p Where p.estado = 'cantidad' ")
-    Integer listarProductoscontados();
 
 
+
+
+    @Query("SELECT SUM(p.cantidad) FROM Producto p")
+    Integer totalProductosContados();
+
+    @Query(value = "SELECT SUM(p.cantidad) FROM Producto p WHERE p.estado = 'desactivado'")
+    Integer listarConFaltantes();
+
+    @Query("SELECT  SUM(p.cantidad) FROM Producto p WHERE p.estado = 'activo'")
+    Integer listarConExistencias();
+
+    @Modifying
+    @Query("UPDATE Producto p SET p.estanteria = null WHERE p.estanteria.id_estanteria = :idEstanteria")
+    void desasociarProductosDeEstanteria(@Param("idEstanteria") int idEstanteria);
 
 }
 

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
@@ -47,7 +49,8 @@ public class Producto {
         private Categoria categoria;
 
         @ManyToOne
-        @JoinColumn(name = "id_estanteria", nullable = false)
+        @JoinColumn(name = "id_estanteria", nullable = true)
+        @OnDelete(action = OnDeleteAction.SET_NULL)  // Para que al eliminar la estantería se ponga a null
         private Estanteria estanteria;
 
 

@@ -3,6 +3,7 @@ package com.inventario.gestor_inventario.service;
 import com.inventario.gestor_inventario.entities.Estanteria;
 import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.utilities.EstanteriaAlmDTO;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -27,4 +28,11 @@ public interface EstanteriaService {
      * @param id_estanteria toma un producto como parametro de entrada
      */
     void EliminarEstanteria(int id_estanteria);
-}
+
+
+    List<Estanteria> getEstanteriasByAlmacenId(int idAlmacen);
+
+
+    void eliminarEstanteria(int idEstanteria);
+
+    }

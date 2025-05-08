@@ -1,11 +1,12 @@
 package com.inventario.gestor_inventario.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "estanteria")
@@ -23,6 +24,12 @@ public class Estanteria {
 
     @ManyToOne
     @JoinColumn(name = "id_almacen", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference
     private Almacen almacen;
-    
+
+
+    @Column(name = "orientacion", columnDefinition = "ENUM('horizontal', 'vertical')")
+    private String orientacion;
+
 }

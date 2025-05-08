@@ -31,14 +31,16 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
 
-    public int listarproductosContados() {
-        return productoRepository.listarProductoscontados();
+    public Integer totalProductosContados() {
+        return productoRepository.totalProductosContados();
     }
-    public List<Producto> listarConExistencias(){
-        return productoRepository.findAll();
+
+
+    public Integer listarConExistencias(){
+        return productoRepository.listarConExistencias();
     }
-    public List<Producto>listarConFaltantes(){
-        return productoRepository.findAll();
+    public Integer listarConFaltantes(){
+        return productoRepository.listarConFaltantes();
     }
 
     @Override

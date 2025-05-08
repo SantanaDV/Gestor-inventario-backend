@@ -21,6 +21,8 @@ public class EstanteriaServiceImpl implements EstanteriaService {
     private EstanteriaRepository estanteriaRepository;
     @Autowired
     private AlmacenRepository almacenRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @Override
     public List<Estanteria> listarEstanteria() {
@@ -32,12 +34,23 @@ public class EstanteriaServiceImpl implements EstanteriaService {
         Estanteria es = new Estanteria();
         es.setId_estanteria(estanteria.getId_estanteria());
         es.setPosicion(estanteria.getPosicion());
+        es.setOrientacion(estanteria.getOrientacion());
         es.setAlmacen(almacenRepository.findById(estanteria.getId_almacen()).orElse(null));
         return estanteriaRepository.save(es);
+    }
+    @Override
+    public List<Estanteria> getEstanteriasByAlmacenId(int idAlmacen) {
+        return estanteriaRepository.findByAlmacenIdAlmacen(idAlmacen);
     }
 
     @Override
     public void EliminarEstanteria(int estanteria) {
         estanteriaRepository.deleteById(estanteria);
+    }
+
+    @Override
+    public void eliminarEstanteria(int idEstanteria) {
+        productoRepository.desasociarProductosDeEstanteria(idEstanteria);
+        estanteriaRepository.deleteById(idEstanteria);
     }
 }
