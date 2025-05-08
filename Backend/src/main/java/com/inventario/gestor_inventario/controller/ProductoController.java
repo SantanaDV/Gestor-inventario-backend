@@ -36,12 +36,18 @@ public class ProductoController {
         return productoServiceImpl.listaProductos();
     }
 
+    @GetMapping("/{id}")
+    public Producto obtenerProductoPorId(@PathVariable int id) {
+        return productoServiceImpl.listaProductos().stream()
+                .filter(p -> p.getId_producto() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+    }
+
     @GetMapping ("/productosContados")
     public int listarProductosContados() {
         return productoServiceImpl.listarproductosContados();
     }
-
-
 
     @GetMapping("/conExistencias")
     public List<Producto> listarConExistencias(){
