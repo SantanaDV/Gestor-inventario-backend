@@ -1,9 +1,0 @@
-# Carpetas y archivos temporales de Android/Gradle
-.gradle/
-build/
-caches/
-daemon/
-native/
-wrapper/
-*.lock
-Backend/src/main/resources/application.properties
