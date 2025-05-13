@@ -28,9 +28,8 @@ public class CategoriaTareaController {
         return categoriaServiceImpl.crearActualizarCategorias(categoria);
     }
 
-    @PutMapping("/{id}")
-    public CategoriaTarea actualizarCategorias(@PathVariable int id, @RequestBody CategoriaTarea categoria) {
-        categoria.setId(id);
+    @PutMapping
+    public CategoriaTarea actualizarCategorias(@RequestBody CategoriaTarea categoria) {
         return categoriaServiceImpl.crearActualizarCategorias(categoria);
     }
 
