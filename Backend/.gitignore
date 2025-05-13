@@ -87,5 +87,5 @@ tailwind.config.js
 /.metadata/
 
 #Proyecto
-src/main/resources/application.properties
-src/main/resources/variables.env
+Backend/src/main/resources/application.properties
+Backend/src/main/resources/variables.env
