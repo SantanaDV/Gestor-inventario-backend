@@ -7,3 +7,5 @@ native/
 wrapper/
 *.lock
 Backend/src/main/resources/application.properties
+Backend/src/main/resources/application.properties
+Backend/src/main/resources/application.properties
