@@ -2,6 +2,7 @@ package com.inventario.gestor_inventario.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inventario.gestor_inventario.entities.Producto;
+import com.inventario.gestor_inventario.entities.Usuario;
 import com.inventario.gestor_inventario.service.implementations.ProductoServiceImpl;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -31,6 +32,7 @@ public class ProductoController {
         this.productoServiceImpl = productoServiceImpl;
     }
 
+<<<<<<< Updated upstream
     @GetMapping
     public List<Producto> listaProductos(){
         return productoServiceImpl.listaProductos();
@@ -58,7 +60,20 @@ public class ProductoController {
                 .filter(p -> p.getId_producto() == id)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+=======
+    @GetMapping("/producto/listar")
+    public List<Producto> listarProductos(){
+        return productoServiceImpl.listarProductos();
+>>>>>>> Stashed changes
     }
+
+    @GetMapping("/producto/conExistencias")
+    public List<Producto> listarConExistencias(){return  productoServiceImpl.listarConExistencias();}
+
+    @GetMapping("/producto/conFaltantes")
+    public List<Producto>listarConFaltantes(){ return  productoServiceImpl.listarConFaltantes();}
+
+
 
     @GetMapping("/obtenerProductoQR/{codigo_qr}")
     @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")

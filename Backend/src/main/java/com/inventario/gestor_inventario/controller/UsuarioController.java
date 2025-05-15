@@ -73,6 +73,7 @@ public class UsuarioController {
         return ResponseEntity.ok(existe);
     }
 
+<<<<<<< Updated upstream
     // Nuevo endpoint para sacar el nombre del usuario
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRole('ADMIN', 'EMPLEADO')")
@@ -116,6 +117,10 @@ public class UsuarioController {
     public Integer listarUsuariosActivos() {
         return usuarioServiceImpl.listarUsuariosActivos();
     }
+=======
+    @GetMapping("/usuario/usuariosActivos")
+    public List<Usuario>listaTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
+>>>>>>> Stashed changes
 
 
 }

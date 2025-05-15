@@ -23,6 +23,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findAll();
     }
 
+<<<<<<< Updated upstream
+=======
+    public List<Usuario> ListarUsuariosActivos(){ return usuarioRepository.findAll(); }
+
+
+>>>>>>> Stashed changes
     @Override
     public Usuario CrearActualizarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
