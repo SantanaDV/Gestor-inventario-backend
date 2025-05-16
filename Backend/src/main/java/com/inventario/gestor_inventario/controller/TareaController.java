@@ -1,12 +1,10 @@
 package com.inventario.gestor_inventario.controller;
 
 import com.inventario.gestor_inventario.entities.Tarea;
-import com.inventario.gestor_inventario.repository.TareaRepository;
 import com.inventario.gestor_inventario.service.implementations.TareaServiceImpl;
 import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +39,14 @@ public class TareaController {
     public void EliminarTarea(@PathVariable int id) {
         this.repository.EliminarTarea(id);
     }
+
+    @GetMapping ("/listarTareaHacer")
+    public List<Tarea> ListarTareaHacer() { return this.repository.ListarTareaHacer();}
+
+    @GetMapping ("/listarTareaProceso")
+    public List<Tarea>ListarTareaProceso(){return this.repository.ListarTareaProceso();}
+
+    @GetMapping ("/listarTareaRealizada")
+    public List<Tarea> ListarTareaRealizada() { return this.repository.ListarTareaRealizada();}
 
 }

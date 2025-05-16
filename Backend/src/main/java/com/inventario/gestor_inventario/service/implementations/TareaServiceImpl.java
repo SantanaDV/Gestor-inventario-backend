@@ -1,13 +1,9 @@
 package com.inventario.gestor_inventario.service.implementations;
 
-import com.inventario.gestor_inventario.entities.CategoriaTarea;
-import com.inventario.gestor_inventario.entities.Notificacion;
-import com.inventario.gestor_inventario.entities.Producto;
 import com.inventario.gestor_inventario.entities.Tarea;
 import com.inventario.gestor_inventario.repository.CategoriasTareasRepository;
 import com.inventario.gestor_inventario.repository.TareaRepository;
 import com.inventario.gestor_inventario.service.TareaService;
-import com.inventario.gestor_inventario.utilities.NotificacionesDTO;
 import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +37,6 @@ public class TareaServiceImpl implements TareaService {
     }
 
 
-
     @Override
     public Tarea CrearTarea(TareaCategoriaDTO tarea) {
         Tarea t1 = new Tarea();
@@ -70,5 +65,31 @@ public class TareaServiceImpl implements TareaService {
         return tareaRepository.contarNumeroTareasFinalizadasHoy();
     }
 
+    @Override
+    public List<Tarea> contarTareasPorHacer() {
+        return List.of();
+    }
 
+
+
+
+
+
+
+
+
+    @Override
+    public List<Tarea> ListarTareaRealizada() {
+        return tareaRepository.listarTareaRealizada();
+    }
+
+    @Override
+    public List<Tarea> ListarTareaProceso() {
+        return  tareaRepository.listarTareaProceso();
+    }
+    @Override
+    public List<Tarea> ListarTareaHacer() {
+        return tareaRepository.listarTareaHacer();
+    }
 }
+
