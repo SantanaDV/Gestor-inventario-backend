@@ -29,12 +29,6 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> listaProductos() {
         return productoRepository.findAll();
     }
-    public List<Producto> listarConExistencias(){
-        return productoRepository.findAll();
-    }
-    public List<Producto>listarConFaltantes(){
-        return productoRepository.findAll();
-    }
 
 
     public Integer totalProductosContados() {
