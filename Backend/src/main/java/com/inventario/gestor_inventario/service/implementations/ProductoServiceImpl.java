@@ -29,6 +29,10 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> listaProductos() {
         return productoRepository.findAll();
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 
     public Integer totalProductosContados() {
@@ -101,5 +105,12 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public List<ProductoMesDTO> listarProductosMes(){
         return productoRepository.listarProductosMes();
+    }
+
+    /*
+    ojo se ha cambiado pero creo que esta mal
+     */
+    public List<Producto> listarProductos() {
+        return List.of();
     }
 }

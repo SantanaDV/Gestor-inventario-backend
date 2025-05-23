@@ -28,35 +28,37 @@ public class ProductoController {
     private ProductoServiceImpl productoServiceImpl;
 
     public ProductoController(ProductoServiceImpl productoServiceImpl) {
-        this.productoServiceImpl = productoServiceImpl;
+    this.productoServiceImpl = productoServiceImpl;
     }
 
     @GetMapping
-    public List<Producto> listaProductos(){
+    public List<Producto> listaProductos() {
         return productoServiceImpl.listaProductos();
     }
 
 
-    @GetMapping ("/productosContados")
-    public Integer totalProductosContados(){
+    @GetMapping("/productosContados")
+    public Integer totalProductosContados() {
         return productoServiceImpl.totalProductosContados();
     }
 
     @GetMapping("/conExistencias")
-    public Integer listarConExistencias(){
-        return  productoServiceImpl.listarConExistencias();
+    public Integer listarConExistencias() {
+        return productoServiceImpl.listarConExistencias();
 
     }
 
     @GetMapping("/conFaltantes")
-    public Integer listarConFaltantes(){
-        return  productoServiceImpl.listarConFaltantes();}
+    public Integer listarConFaltantes() {
+        return productoServiceImpl.listarConFaltantes();
+    }
 
     @GetMapping("/{id}")
     public Producto obtenerProductoPorId(@PathVariable int id) {
         return productoServiceImpl.listaProductos().stream()
                 .filter(p -> p.getId_producto() == id)
                 .findFirst()
+<<<<<<< Updated upstream
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
     }
 
@@ -65,74 +67,74 @@ public class ProductoController {
     public Producto obtenerProductoPorQR(@PathVariable String codigo_qr){
         return productoServiceImpl.obtenerProductoConQR(codigo_qr);
     }
+=======
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));}
 
-    @PostMapping(consumes = "multipart/form-data")
-    public Producto CrearProducto(
-            @RequestPart("producto") String productoJSON,
-            @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
+    @GetMapping("/producto/listar") public List<Producto> listarProductos () {
+        return productoServiceImpl.listarProductos();}
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
-        if(producto.getFecha_creacion() == null){
-            producto.setFecha_creacion(new Timestamp(System.currentTimeMillis()));
 
+
+    @GetMapping("/obtenerProductoQR/{codigo_qr}") @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
+    public Producto obtenerProductoPorQR (@PathVariable String codigo_qr){
+        return productoServiceImpl.obtenerProductoConQR(codigo_qr);}
+>>>>>>> Stashed changes
+
+    @PostMapping(consumes = "multipart/form-data") public Producto CrearProducto (@RequestPart("producto") String
+    productoJSON, @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
+            if (producto.getFecha_creacion() == null) {
+                producto.setFecha_creacion(new Timestamp(System.currentTimeMillis()));}
+
+            Dotenv dotenv = Dotenv.configure().directory("src/main/resources").filename("variables.env").load();
+            String urlServer = dotenv.get("URL_SERVER");
+            String port = dotenv.get("PORT_SERVER");
+            String protocol = dotenv.get("SERVER_PROTOCOL");
+
+            if (imagen != null && !imagen.isEmpty()) {
+                Path uploadDir = Paths.get("src/main/resources/static/uploads/");
+                Files.createDirectories(uploadDir);
+
+                String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
+                Path path = uploadDir.resolve(filename);
+                Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                producto.setUrl_img(filename);
+            }
+            return this.productoServiceImpl.CrearActualizarProducto(producto);
         }
 
-        Dotenv dotenv = Dotenv.configure()
-                .directory("src/main/resources")
-                .filename("variables.env")
-                .load();
-        String urlServer = dotenv.get("URL_SERVER");
-        String port = dotenv.get("PORT_SERVER");
-        String protocol = dotenv.get("SERVER_PROTOCOL");
 
-        if (imagen != null && !imagen.isEmpty()) {
-            Path uploadDir = Paths.get("src/main/resources/static/uploads/");
-            Files.createDirectories(uploadDir);
+    @PutMapping(consumes = "multipart/form-data") public Producto ActualizarProducto
+    (@RequestPart("producto") String productoJSON, @RequestPart(value = "imagen", required = false) MultipartFile
+        imagen) throws IOException {
 
-            String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
-            Path path = uploadDir.resolve(filename);
-            Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            ObjectMapper objectMapper = new ObjectMapper();
+            ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
 
-            producto.setUrl_img(filename);
+            // Verificamos si la imagen es nula o vacía
+            if (imagen != null && !imagen.isEmpty()) {
+                // Si se pasa una imagen nueva, la actualizamos
+                Path uploadDir = Paths.get("src/main/resources/static/uploads/");
+                Files.createDirectories(uploadDir);
+
+                String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
+                Path path = uploadDir.resolve(filename);
+                Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                // Actualizamos la URL de la imagen
+                producto.setUrl_img(filename);
+            }
+            // Si no se pasa una imagen, se deja la imagen original que ya tenía el producto
+
+            return this.productoServiceImpl.CrearActualizarProducto(producto);
         }
-        return this.productoServiceImpl.CrearActualizarProducto(producto);
+
+
+    @DeleteMapping("/{id}") public void eliminarProducto ( @PathVariable int id){
+    Producto producto = productoServiceImpl.listaProductos().stream().filter(p -> p.getId_producto() == id).findFirst().orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+    productoServiceImpl.EliminarProducto(producto);}
     }
 
-
-    @PutMapping(consumes = "multipart/form-data")
-    public Producto ActualizarProducto(
-            @RequestPart("producto") String productoJSON,
-            @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
-
-        // Verificamos si la imagen es nula o vacía
-        if (imagen != null && !imagen.isEmpty()) {
-            // Si se pasa una imagen nueva, la actualizamos
-            Path uploadDir = Paths.get("src/main/resources/static/uploads/");
-            Files.createDirectories(uploadDir);
-
-            String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
-            Path path = uploadDir.resolve(filename);
-            Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
-            // Actualizamos la URL de la imagen
-            producto.setUrl_img(filename);
-        }
-        // Si no se pasa una imagen, se deja la imagen original que ya tenía el producto
-
-        return this.productoServiceImpl.CrearActualizarProducto(producto);
-    }
-
-
-    @DeleteMapping("/{id}")
-    public void eliminarProducto(@PathVariable int id) {
-        Producto producto = productoServiceImpl.listaProductos().stream()
-                .filter(p -> p.getId_producto() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
-        productoServiceImpl.EliminarProducto(producto);
-    }
-}

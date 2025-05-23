@@ -80,7 +80,7 @@ public class TareaServiceImpl implements TareaService {
 
     @Override
     public List<Tarea> ListarTareaRealizada() {
-        return tareaRepository.listarTareaRealizada();
+        return tareaRepository.listarTareaFinalizada();
     }
 
     @Override
