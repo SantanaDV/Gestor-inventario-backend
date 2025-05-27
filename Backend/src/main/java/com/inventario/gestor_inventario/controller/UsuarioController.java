@@ -117,11 +117,8 @@ public class UsuarioController {
     public Integer listarUsuariosActivos() {
         return usuarioServiceImpl.listarUsuariosActivos();
     }
-<<<<<<< Updated upstream
-=======
     @GetMapping("/usuario/usuariosActivos")
     public List<Usuario>listaTotal_usuarios(){return usuarioServiceImpl.ListarUsuariosActivos();}
->>>>>>> Stashed changes
 
 
 }

@@ -29,10 +29,7 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> listaProductos() {
         return productoRepository.findAll();
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 
     public Integer totalProductosContados() {

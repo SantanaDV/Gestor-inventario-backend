@@ -58,17 +58,9 @@ public class ProductoController {
         return productoServiceImpl.listaProductos().stream()
                 .filter(p -> p.getId_producto() == id)
                 .findFirst()
-<<<<<<< Updated upstream
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
     }
 
-    @GetMapping("/obtenerProductoQR/{codigo_qr}")
-    @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
-    public Producto obtenerProductoPorQR(@PathVariable String codigo_qr){
-        return productoServiceImpl.obtenerProductoConQR(codigo_qr);
-    }
-=======
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));}
 
     @GetMapping("/producto/listar") public List<Producto> listarProductos () {
         return productoServiceImpl.listarProductos();}
@@ -78,7 +70,6 @@ public class ProductoController {
     @GetMapping("/obtenerProductoQR/{codigo_qr}") @PreAuthorize("hasRole('EMPLEADO') or hasRole('ADMIN')")
     public Producto obtenerProductoPorQR (@PathVariable String codigo_qr){
         return productoServiceImpl.obtenerProductoConQR(codigo_qr);}
->>>>>>> Stashed changes
 
     @PostMapping(consumes = "multipart/form-data") public Producto CrearProducto (@RequestPart("producto") String
     productoJSON, @RequestPart(value = "imagen", required = false) MultipartFile imagen) throws IOException {
