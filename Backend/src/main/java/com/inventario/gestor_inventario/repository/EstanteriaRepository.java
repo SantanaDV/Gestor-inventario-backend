@@ -15,5 +15,6 @@ public interface EstanteriaRepository extends JpaRepository<Estanteria, Integer>
     @Query("SELECT e FROM Estanteria e WHERE e.almacen.id_almacen = :idAlmacen")
     List<Estanteria> findByAlmacenIdAlmacen(@Param("idAlmacen") int idAlmacen);
 
+    Estanteria getEstanteriaById_estanteria(int idEstanteria);
 }
 

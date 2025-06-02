@@ -7,6 +7,7 @@ import com.inventario.gestor_inventario.utilities.ProductosCantCat;
 import com.inventario.gestor_inventario.utilities.ProductosSalEntDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductoService {
 
@@ -81,4 +82,6 @@ public interface ProductoService {
      * @return List<Producto>
      */
     List<ProductoMesDTO>listarProductosMes();
+
+    Optional<Producto> obtenerPorId(int idProd);
 }
