@@ -18,10 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,7 +104,6 @@ public class ProductoController {
 
         ObjectMapper objectMapper = new ObjectMapper();
         ProductoCatDTO producto = objectMapper.readValue(productoJSON, ProductoCatDTO.class);
-
         // Verificamos si la imagen es nula o vacía
         if (imagen != null && !imagen.isEmpty()) {
             // Si se pasa una imagen nueva, la actualizamos
@@ -117,12 +113,10 @@ public class ProductoController {
             String filename = System.currentTimeMillis() + "_" + imagen.getOriginalFilename();
             Path path = uploadDir.resolve(filename);
             Files.copy(imagen.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-
             // Actualizamos la URL de la imagen
             producto.setUrl_img(filename);
         }
         // Si no se pasa una imagen, se deja la imagen original que ya tenía el producto
-
         return this.productoServiceImpl.CrearActualizarProducto(producto);
     }
 
@@ -146,7 +140,7 @@ public class ProductoController {
 
         // Para cada id de producto en el DTO
         for (Integer idProd : dto.getIds_producto()) {
-            // “Obtener” el producto envuelto en Optional
+            // Obtener el producto envuelto en Optional
             Optional<Producto> optionalProd = productoServiceImpl.obtenerPorId(idProd);
 
             // Verifico que exista
@@ -157,19 +151,10 @@ public class ProductoController {
                 // Para ello recuperamos la entidad Estantería por su id:
                 Estanteria est = estanteriaServiceImpl
                         .getEstanteriaByEstanteriaId(dto.getId_estanteria());
-                // Puede que getEstanteriaByEstanteriaId devuelva null si no existe;
-                // depende de tu implementación. En ese caso podrías saltar o arrojar error.
+
 
                 // Asigno el objeto Estantería al producto:
                 p.setEstanteria(est);
-
-                // Finalmente persisto los cambios (usando tu método CrearActualizarProducto):
-                // Observa que tu servicio espera un DTO, así que tienes dos opciones:
-                //  A) Volver a convertir “p” a ProductoCatDTO, o
-                //  B) (más limpio) crear un método en el service que reciba directamente la entidad Producto
-                //     para no tener que mapear otra vez.
-
-                // Opción A: mapear “p” a ProductoCatDTO y guardarlo:
                 ProductoCatDTO dtoProducto = new ProductoCatDTO();
                 dtoProducto.setId_producto(p.getId_producto());
                 dtoProducto.setNombre(p.getNombre());
