@@ -43,6 +43,10 @@ public class EstanteriaServiceImpl implements EstanteriaService {
         return estanteriaRepository.findByAlmacenIdAlmacen(idAlmacen);
     }
 
+    public Estanteria getEstanteriaByEstanteriaId(int idEstanteria){
+        return estanteriaRepository.getEstanteriaById_estanteria(idEstanteria);
+    }
+
     @Override
     public void EliminarEstanteria(int estanteria) {
         estanteriaRepository.deleteById(estanteria);
