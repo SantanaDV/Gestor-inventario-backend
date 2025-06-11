@@ -86,7 +86,9 @@ public class ProductoServiceImpl implements ProductoService {
         return productoRepository.findByCodigoQr(codigo_qr);
     }
 
-
+    public Producto save(Producto p) {
+        return productoRepository.save(p);
+    }
     public List<ProductosSalEntDTO> listarProductosEntrantesRecientes() {
         return productoRepository.listarProductosEntrantesRecientes();
     }

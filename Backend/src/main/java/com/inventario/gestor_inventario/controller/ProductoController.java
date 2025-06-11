@@ -8,6 +8,9 @@ import com.inventario.gestor_inventario.service.implementations.ProductoServiceI
 import com.inventario.gestor_inventario.utilities.AsignarProductosDTO;
 import com.inventario.gestor_inventario.utilities.ProductoCatDTO;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +32,7 @@ public class ProductoController {
 
     private ProductoServiceImpl productoServiceImpl;
     private EstanteriaServiceImpl estanteriaServiceImpl;
+    private final Logger log = LoggerFactory.getLogger(ProductoController.class);
 
     public ProductoController(ProductoServiceImpl productoServiceImpl, EstanteriaServiceImpl estanteriaServiceImpl) {
         this.productoServiceImpl = productoServiceImpl;
@@ -62,6 +67,7 @@ public class ProductoController {
     public Producto obtenerProductoPorQR(@PathVariable String codigo_qr) {
         return productoServiceImpl.obtenerProductoConQR(codigo_qr);
     }
+
 
     @PostMapping(consumes = "multipart/form-data")
     public Producto CrearProducto(
@@ -135,46 +141,75 @@ public class ProductoController {
      * Recibe un JSON con { id_estanteria, ids_producto: [ ... ] }.
      */
     @PutMapping("/asignarEstanteria")
-    public void asignarProductosAEstanteria(
+    public ResponseEntity<Void> asignarProductosAEstanteria(
             @RequestBody AsignarProductosDTO dto) {
 
-        // Para cada id de producto en el DTO
+        log.debug(" asignarEstanteria recibí DTO = {}", dto);
+
+        // Recupera el posible id_estanteria (puede ser null al desasignar)
+        Integer idEst  = dto.getId_estanteria();
+        Map<Integer,Integer> baldas = dto.getBaldas();
+
         for (Integer idProd : dto.getIds_producto()) {
-            // Obtener el producto envuelto en Optional
-            Optional<Producto> optionalProd = productoServiceImpl.obtenerPorId(idProd);
-
-            // Verifico que exista
-            if (optionalProd.isPresent()) {
-                Producto p = optionalProd.get();
-
-                // Ahora debemos asignar la Estantería correspondiente
-                // Para ello recuperamos la entidad Estantería por su id:
-                Estanteria est = estanteriaServiceImpl
-                        .getEstanteriaByEstanteriaId(dto.getId_estanteria());
-
-
-                // Asigno el objeto Estantería al producto:
-                p.setEstanteria(est);
-                ProductoCatDTO dtoProducto = new ProductoCatDTO();
-                dtoProducto.setId_producto(p.getId_producto());
-                dtoProducto.setNombre(p.getNombre());
-                dtoProducto.setCantidad(p.getCantidad());
-                dtoProducto.setEstado(p.getEstado());
-                dtoProducto.setCodigoQr(p.getCodigoQr());
-                dtoProducto.setUrl_img(p.getUrl_img());
-                dtoProducto.setFecha_creacion(p.getFecha_creacion());
-                dtoProducto.setNfc_id(p.getNfc_id());
-                dtoProducto.setBalda(p.getBalda());
-                dtoProducto.setId_categoria(p.getCategoria().getId());
-                // aquí asignas el id_estanteria
-                dtoProducto.setId_estanteria(est != null ? est.getId_estanteria() : null);
-
-                productoServiceImpl.CrearActualizarProducto(dtoProducto);
+            Optional<Producto> opt = productoServiceImpl.obtenerPorId(idProd);
+            if (opt.isEmpty()) {
+                log.warn("⚠ Producto id={} no existe, lo ignoro", idProd);
+                continue;
             }
-            // Si no existe el producto con ese idProd, simplemente lo ignoro.
+            Producto p = opt.get();
+
+            // 1) Si idEst es null, quitar la estantería; si no, cargarla
+            Estanteria e = (idEst != null)
+                    ? estanteriaServiceImpl.getEstanteriaByEstanteriaId(idEst)
+                    : null;
+            p.setEstanteria(e);
+
+            // 2) Asignar la balda (puede venir null también)
+            Integer b = (baldas != null ? baldas.get(idProd) : null);
+            log.debug("   producto id={} → balda del mapa = {}", idProd, b);
+            p.setBalda(b);
+
+            // 3) Persistir cambios
+            productoServiceImpl.save(p);
+            log.debug("   >> producto {} guardado con estanteria={} balda={}", idProd, e, b);
         }
-        // No devolvemos nada (204 No Content).
+
+        return ResponseEntity.ok().build();
     }
+        /**
+         *  Editar únicamente la balda de un producto
+         */
+        @PatchMapping("/{id}/balda")
+        public ResponseEntity<Producto> editarBalda(
+                @PathVariable int id,
+                @RequestBody Map<String, Integer> body
+        ) {
+            return productoServiceImpl.obtenerPorId(id)
+                    .map(p -> {
+                        Integer nuevaBalda = body.get("balda");
+                        p.setBalda(nuevaBalda);
+                        Producto guardado = productoServiceImpl.save(p);
+                        return ResponseEntity.ok(guardado);
+                    })
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        }
+
+        /**
+         *  Desasignar producto de estantería (quita estantería y balda)
+         */
+        @DeleteMapping("/{id}/desasignar")
+        public ResponseEntity<Void> desasignarProducto(@PathVariable int id) {
+            return productoServiceImpl.obtenerPorId(id)
+                    .map(p -> {
+                        p.setEstanteria(null);
+                        p.setBalda(null);
+                        productoServiceImpl.save(p);
+                        return ResponseEntity.noContent().<Void>build();
+                    })
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        }
+
+
 
 
 }
