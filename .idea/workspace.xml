@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e1d897b-2a56-4db0-91b3-294f074cddbf" name="Changes" comment="" />
+    <list default="true" id="0e1d897b-2a56-4db0-91b3-294f074cddbf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/converters/EstadoConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/TareaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/controller/TareaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Tarea.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/entities/Tarea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/repository/TareaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/repository/TareaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/TareaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/TareaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/TareaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/service/implementations/TareaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/utilities/TareaCategoriaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/inventario/gestor_inventario/utilities/TareaCategoriaDTO.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +18,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2x1rbokt96QMtLdygl1BaOSbnQd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,7 +30,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "rama__rafa",
+    "git-widget-placeholder": "Monica-Blanco",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/manue/Documents/Gestor-inventario-backend/Backend",
     "project.structure.last.edited": "Project",

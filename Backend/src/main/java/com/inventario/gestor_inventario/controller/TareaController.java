@@ -5,6 +5,7 @@ import com.inventario.gestor_inventario.service.implementations.TareaServiceImpl
 import com.inventario.gestor_inventario.utilities.TareaCategoriaDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,12 +24,13 @@ public class TareaController {
 
     @GetMapping
     public List<TareaCategoriaDTO> ListarTarea() {
-       return this.repository.ListarTarea();
+        return this.repository.ListarTarea();
     }
-    @PostMapping
-    public Tarea CrearTarea(@RequestBody TareaCategoriaDTO tarea) {
-        return this.repository.CrearTarea(tarea);
-    }
+
+//    @PostMapping
+//    public Tarea CrearTarea(@RequestBody TareaCategoriaDTO tarea) {
+//        return this.repository.CrearTarea(tarea);
+//    }
 
     @PutMapping
     public Tarea ActualizarTarea(@RequestBody TareaCategoriaDTO tarea) {
@@ -40,13 +42,35 @@ public class TareaController {
         this.repository.EliminarTarea(id);
     }
 
-    @GetMapping ("/listarTareaHacer")
-    public List<Tarea> ListarTareaHacer() { return this.repository.ListarTareaHacer();}
+//    @PostMapping ("/listarTareaHacer")
+//    public List<Tarea> ListarTareaHacer() { return this.repository.ListarTareaHacer();}
 
-    @GetMapping ("/listarTareaProceso")
-    public List<Tarea>ListarTareaProceso(){return this.repository.ListarTareaProceso();}
+    @GetMapping("/listarTareaHacer")
+    public List<Tarea> ListarTareaHacer() {
+        try {
+            logger.info("Listando tareas por hacer");
+            return this.repository.ListarTareaHacer();
+        } catch (Exception e) {
+            logger.error("Error al listar tareas por hacer", e);
+            return List.of(); // evita que explote
+        }
+    }
 
-    @GetMapping ("/listarTareaRealizada")
-    public List<Tarea> ListarTareaRealizada() { return this.repository.ListarTareaRealizada();}
+
+    @GetMapping("/listarTareaProceso")
+    public List<Tarea> ListarTareaProceso() {
+        return this.repository.ListarTareaProceso();
+    }
+
+    @GetMapping("/listarTareaRealizada")
+    public List<Tarea> ListarTareaRealizada() {
+        return this.repository.ListarTareaRealizada();
+    }
+
+    @PostMapping("/crearTarea")
+    public ResponseEntity<Tarea> crearTarea(@RequestBody TareaCategoriaDTO dto) {
+        // lógica para guardar tarea
+        return null;
+    }
 
 }

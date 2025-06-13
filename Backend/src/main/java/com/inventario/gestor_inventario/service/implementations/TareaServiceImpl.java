@@ -46,7 +46,8 @@ public class TareaServiceImpl implements TareaService {
         t1.setFecha_asignacion(tarea.getFecha_asignacion());
         t1.setFecha_finalizacion(tarea.getFecha_finalizacion());
         t1.setEmpleado_asignado(tarea.getEmpleado_asignado());
-        t1.setCategoria(categoriatarea.findById(tarea.getId_categoria()).orElse(null));
+        t1.setCategoria(tarea.getId_categoria());
+        //t1.setCategoria(categoriatarea.findById(tarea.getId_categoria()).orElse(null));
         return tareaRepository.save(t1);
     }
 
@@ -72,12 +73,6 @@ public class TareaServiceImpl implements TareaService {
 
 
 
-
-
-
-
-
-
     @Override
     public List<Tarea> ListarTareaRealizada() {
         return tareaRepository.listarTareaFinalizada();
@@ -91,5 +86,7 @@ public class TareaServiceImpl implements TareaService {
     public List<Tarea> ListarTareaHacer() {
         return tareaRepository.listarTareaHacer();
     }
+
+
 }
 

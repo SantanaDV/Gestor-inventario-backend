@@ -20,8 +20,10 @@ public interface TareaService {
      * @param tarea recibe una tarea
      * @return crear
      */
-    Tarea CrearTarea(TareaCategoriaDTO tarea);
+//    Tarea CrearTarea(TareaCategoriaDTO tarea);
 
+
+    Tarea CrearTarea(TareaCategoriaDTO tarea);
 
     /**
      * Elimino tarea
